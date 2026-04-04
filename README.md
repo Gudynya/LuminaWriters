@@ -12,7 +12,7 @@ Aplicación **Flutter** para acompañar el proceso de escritura creativa: landin
 | Ruta | Descripción |
 |------|-------------|
 | `app/` | Proyecto Flutter **lumina_writers** (código, tests, `android/`, `web/`) |
-| `openspec/` | Configuración del flujo de trabajo **OpenSpec** (`config.yaml`, especificación por cambios) |
+| `openspec/` | **OpenSpec:** `config.yaml`, `README.md`, `specs/{product,client}/spec.md`, `changes/` |
 | `.cursor/` | Comandos y skills de Cursor/OpenSpec (proponer, aplicar, explorar, archivar) |
 | `.vscode/` | Configuraciones de depuración para Chrome, Windows y Android (`launch.json`) |
 
@@ -63,7 +63,7 @@ En la raíz del repo hay `launch.json` para depurar con **`cwd`** en `app/` cuan
 
 ## OpenSpec
 
-El repositorio está preparado para un flujo **spec-driven** con OpenSpec (`openspec/config.yaml` y herramientas bajo `.cursor/`). Sirve para proponer cambios, tareas y documentación alineada con el código.
+El repositorio usa un flujo **spec-driven** con OpenSpec. Resumen en [`openspec/README.md`](openspec/README.md): contexto en [`openspec/config.yaml`](openspec/config.yaml), especificaciones en [`openspec/specs/`](openspec/specs/) y cambios propuestos en [`openspec/changes/`](openspec/changes/). Las herramientas bajo `.cursor/commands/` (`opsx-*`) encajan con ese flujo.
 
 ## Ramas y evolución
 

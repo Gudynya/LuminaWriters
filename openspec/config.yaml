@@ -1,20 +1,29 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+# Contexto del proyecto (se usa al crear artefactos con OpenSpec / IA).
+# Mantener alineado con openspec/README.md y openspec/specs/*/spec.md
+context: |
+  Repositorio: LuminaWriters (monorepo ligero).
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Código de aplicación:
+  - Todo el proyecto Flutter vive en la carpeta `app/` (paquete `lumina_writers`).
+  - No hay pubspec en la raíz del repo; ejecutar comandos Flutter desde `app/`.
+  - Plataformas: Android y web. Tema: Material 3, Dart SDK ^3.11.4.
+
+  Documentación de producto y cliente:
+  - `openspec/specs/product/spec.md` — visión y alcance.
+  - `openspec/specs/client/spec.md` — rutas, pantallas y convenciones Flutter.
+
+  Flujo OpenSpec:
+  - Cambios nuevos bajo `openspec/changes/<nombre>/` (proposal, design, tasks).
+  - Specs estables bajo `openspec/specs/<capability>/spec.md`.
+  - Comandos Cursor: `.cursor/commands/opsx-*.md` (propose, apply, explore, archive).
+
+  Commits: mensajes claros; convención tipo Conventional Commits frecuente (feat/fix/docs/chore).
+
+# Reglas opcionales por tipo de artefacto (descomenta y adapta si el esquema lo soporta)
+# rules:
+#   proposal:
+#     - Incluir alcance explícito y no-objetivos cuando afecte al producto.
+#   tasks:
+#     - Referenciar rutas de archivos bajo `app/` con rutas relativas al repo.
