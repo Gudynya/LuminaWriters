@@ -41,21 +41,31 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
         child: SafeArea(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 420),
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      tooltip: 'Back',
-                      onPressed: () => Navigator.of(context).maybePop(),
-                      icon: const Icon(Icons.arrow_back_rounded),
-                    ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 4),
+                child: Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: IconButton(
+                    tooltip: 'Back',
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+                    onPressed: () => Navigator.of(context).maybePop(),
+                    icon: const Icon(Icons.arrow_back_rounded),
                   ),
-                  const SizedBox(height: 8),
+                ),
+              ),
+              Expanded(
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 420),
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
                   Text(
                     kSignUpWelcomeTitle,
                     style: theme.textTheme.headlineSmall?.copyWith(
@@ -117,9 +127,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
