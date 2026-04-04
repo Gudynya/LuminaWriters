@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// Texto principal del landing (única fuente de verdad para título y tests).
-const String kLandingHeadline =
-    'Bienvenido a LuminaWriter, tu asistente de escritores';
+/// Texto principal del hero (única fuente de verdad para tests).
+const String kLandingWelcome = 'Welcome to LuminaWriters';
+
+/// Imagen de hero (libre de uso vía Unsplash; sustituye por asset local si prefieres offline).
+const String kLandingHeroImageUrl =
+    'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1400&q=80';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -13,58 +16,234 @@ class LandingPage extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 420),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.auto_stories_rounded,
-                    size: 56,
-                    color: colorScheme.primary,
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    kLandingHeadline,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      height: 1.35,
+      backgroundColor: colorScheme.surface,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SafeArea(
+            bottom: false,
+            child: _LandingHeader(colorScheme: colorScheme),
+          ),
+          Expanded(
+            child: _HeroImage(colorScheme: colorScheme, theme: theme),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LandingHeader extends StatelessWidget {
+  const _LandingHeader({required this.colorScheme});
+
+  final ColorScheme colorScheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final narrow = constraints.maxWidth < 420;
+        final brand = Row(
+          children: [
+            Icon(
+              Icons.auto_stories_rounded,
+              size: 32,
+              color: colorScheme.primary,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                'LuminaWriters',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.3,
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed('/login'),
-                      child: const Text('Iniciar sesión'),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed('/signup'),
-                      child: const Text('Crear cuenta'),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextButton(
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed('/recover-password'),
-                    child: const Text('¿Olvidaste tu contraseña?'),
-                  ),
-                ],
               ),
+            ),
+          ],
+        );
+        final actions = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pushNamed('/login'),
+              child: const Text('Log in'),
+            ),
+            const SizedBox(width: 4),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pushNamed('/signup'),
+              child: const Text('Sign up'),
+            ),
+          ],
+        );
+
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(20, 12, 16, 8),
+          child: narrow
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    brand,
+                    const SizedBox(height: 12),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: actions,
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(child: brand),
+                    const SizedBox(width: 12),
+                    actions,
+                  ],
+                ),
+        );
+      },
+    );
+  }
+}
+
+class _HeroImage extends StatelessWidget {
+  const _HeroImage({
+    required this.colorScheme,
+    required this.theme,
+  });
+
+  final ColorScheme colorScheme;
+  final ThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.paddingOf(context).bottom;
+
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.network(
+          kLandingHeroImageUrl,
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+          filterQuality: FilterQuality.medium,
+          width: double.infinity,
+          height: double.infinity,
+          errorBuilder: (context, error, stackTrace) =>
+              _HeroFallback(colorScheme: colorScheme),
+          loadingBuilder: (context, child, progress) {
+            if (progress == null) return child;
+            return _HeroFallback(
+              colorScheme: colorScheme,
+              showSpinner: true,
+            );
+          },
+        ),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.black.withValues(alpha: 0.2),
+                Colors.black.withValues(alpha: 0.45),
+              ],
             ),
           ),
         ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  kLandingWelcome,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: -0.5,
+                    height: 1.2,
+                    color: Colors.white,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withValues(alpha: 0.55),
+                        blurRadius: 16,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Your creative writing companion — draft, refine, and shine.',
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: Colors.white.withValues(alpha: 0.92),
+                    height: 1.45,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withValues(alpha: 0.45),
+                        blurRadius: 12,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          left: 20,
+          right: 20,
+          bottom: 20 + bottomInset,
+          child: Text(
+            'Write with light.',
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+              shadows: [
+                Shadow(
+                  color: Colors.black.withValues(alpha: 0.45),
+                  blurRadius: 12,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HeroFallback extends StatelessWidget {
+  const _HeroFallback({
+    required this.colorScheme,
+    this.showSpinner = false,
+  });
+
+  final ColorScheme colorScheme;
+  final bool showSpinner;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            colorScheme.primaryContainer,
+            colorScheme.secondaryContainer,
+          ],
+        ),
+      ),
+      child: Center(
+        child: showSpinner
+            ? CircularProgressIndicator(color: colorScheme.primary)
+            : Icon(
+                Icons.menu_book_rounded,
+                size: 88,
+                color: colorScheme.primary.withValues(alpha: 0.85),
+              ),
       ),
     );
   }
