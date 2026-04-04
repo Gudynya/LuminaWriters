@@ -13,6 +13,13 @@ const String kSocialInstagramUrl = 'https://www.instagram.com/luminawriters/';
 const String kSocialXUrl = 'https://x.com/luminawriters';
 const String kSocialThreadsUrl = 'https://www.threads.net/@luminawriters';
 
+/// Banderas como secuencias Unicode (español / inglés).
+const String kFlagEmojiEs = '🇪🇸';
+const String kFlagEmojiEn = '🇬🇧';
+
+/// Ancho reservado en la franja inferior del hero para no solapar el lema con las banderas.
+const double _kLanguageFlagsReserveWidth = 104;
+
 Future<void> _openExternalUrl(String url) async {
   final uri = Uri.parse(url);
   await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -39,28 +46,140 @@ class LandingPage extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
+    final bottomInset = MediaQuery.paddingOf(context).bottom;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Stack(
+        clipBehavior: Clip.none,
         children: [
-          SafeArea(
-            bottom: false,
-            child: _LandingHeader(
-              colorScheme: colorScheme,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SafeArea(
+                bottom: false,
+                child: _LandingHeader(
+                  colorScheme: colorScheme,
+                  l10n: l10n,
+                ),
+              ),
+              Expanded(
+                child: _HeroImage(
+                  colorScheme: colorScheme,
+                  theme: theme,
+                  l10n: l10n,
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            right: 16,
+            bottom: 16 + bottomInset,
+            child: _LanguageFlagSelector(
               l10n: l10n,
               onLocaleChanged: onLocaleChanged,
             ),
           ),
-          Expanded(
-            child: _HeroImage(
-              colorScheme: colorScheme,
-              theme: theme,
-              l10n: l10n,
+        ],
+      ),
+    );
+  }
+}
+
+/// Selector compacto con banderas (emoji) en la esquina inferior derecha.
+class _LanguageFlagSelector extends StatelessWidget {
+  const _LanguageFlagSelector({
+    required this.l10n,
+    this.onLocaleChanged,
+  });
+
+  final AppLocalizations l10n;
+  final ValueChanged<Locale>? onLocaleChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final current = _supportedLocaleFrom(context);
+
+    return Tooltip(
+      message: l10n.languageSelectorLabel,
+      child: Material(
+        color: Colors.black.withValues(alpha: 0.42),
+        borderRadius: BorderRadius.circular(28),
+        clipBehavior: Clip.antiAlias,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _FlagButton(
+                locale: const Locale('es'),
+                emoji: kFlagEmojiEs,
+                tooltip: l10n.localeSpanishDisplay,
+                selected: current.languageCode == 'es',
+                onSelected: onLocaleChanged,
+              ),
+              const SizedBox(width: 4),
+              _FlagButton(
+                locale: const Locale('en'),
+                emoji: kFlagEmojiEn,
+                tooltip: l10n.localeEnglishDisplay,
+                selected: current.languageCode == 'en',
+                onSelected: onLocaleChanged,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FlagButton extends StatelessWidget {
+  const _FlagButton({
+    required this.locale,
+    required this.emoji,
+    required this.tooltip,
+    required this.selected,
+    this.onSelected,
+  });
+
+  final Locale locale;
+  final String emoji;
+  final String tooltip;
+  final bool selected;
+  final ValueChanged<Locale>? onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: tooltip,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onSelected == null ? null : () => onSelected!(locale),
+          borderRadius: BorderRadius.circular(22),
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(
+                  color: selected
+                      ? Colors.white
+                      : Colors.white.withValues(alpha: 0.35),
+                  width: selected ? 2 : 1,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                child: Text(
+                  emoji,
+                  style: const TextStyle(fontSize: 26, height: 1.1),
+                ),
+              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -70,46 +189,16 @@ class _LandingHeader extends StatelessWidget {
   const _LandingHeader({
     required this.colorScheme,
     required this.l10n,
-    this.onLocaleChanged,
   });
 
   final ColorScheme colorScheme;
   final AppLocalizations l10n;
-  final ValueChanged<Locale>? onLocaleChanged;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final narrow = constraints.maxWidth < 420;
-        final languageSelector = Tooltip(
-          message: l10n.languageSelectorLabel,
-          child: SegmentedButton<Locale>(
-            showSelectedIcon: false,
-            style: SegmentedButton.styleFrom(
-              visualDensity: VisualDensity.compact,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            segments: [
-              ButtonSegment<Locale>(
-                value: const Locale('es'),
-                label: Text(l10n.localeSpanishDisplay),
-              ),
-              ButtonSegment<Locale>(
-                value: const Locale('en'),
-                label: Text(l10n.localeEnglishDisplay),
-              ),
-            ],
-            selected: {_supportedLocaleFrom(context)},
-            onSelectionChanged: onLocaleChanged == null
-                ? null
-                : (Set<Locale> next) {
-                    if (next.isNotEmpty) {
-                      onLocaleChanged!(next.first);
-                    }
-                  },
-          ),
-        );
         final brand = Row(
           children: [
             Icon(
@@ -152,22 +241,17 @@ class _LandingHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     brand,
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        languageSelector,
-                        const Spacer(),
-                        actions,
-                      ],
+                    const SizedBox(height: 12),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: actions,
                     ),
                   ],
                 )
               : Row(
                   children: [
                     Expanded(child: brand),
-                    const SizedBox(width: 8),
-                    languageSelector,
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 12),
                     actions,
                   ],
                 ),
@@ -267,7 +351,7 @@ class _HeroImage extends StatelessWidget {
         ),
         Positioned(
           left: 16,
-          right: 16,
+          right: 16 + _kLanguageFlagsReserveWidth,
           bottom: 16 + bottomInset,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
