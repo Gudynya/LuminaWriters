@@ -54,6 +54,12 @@ class LandingPage extends StatelessWidget {
                       child: const Text('Crear cuenta'),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  TextButton(
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed('/recover-password'),
+                    child: const Text('¿Olvidaste tu contraseña?'),
+                  ),
                 ],
               ),
             ),

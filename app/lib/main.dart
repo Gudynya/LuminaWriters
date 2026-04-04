@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/landing_page.dart';
 import 'screens/login_page.dart';
 import 'screens/main_shell_page.dart';
+import 'screens/password_recovery_page.dart';
 import 'screens/sign_up_page.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LandingPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
+        '/recover-password': (context) => const PasswordRecoveryPage(),
         '/home': (context) => const MainShellPage(),
       },
     );

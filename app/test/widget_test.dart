@@ -10,6 +10,16 @@ void main() {
     expect(find.text(kLandingHeadline), findsOneWidget);
     expect(find.text('Iniciar sesión'), findsOneWidget);
     expect(find.text('Crear cuenta'), findsOneWidget);
+    expect(find.text('¿Olvidaste tu contraseña?'), findsOneWidget);
+
+    await tester.tap(find.text('¿Olvidaste tu contraseña?'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Recuperar contraseña'), findsOneWidget);
+    expect(find.text('Enviar enlace'), findsOneWidget);
+
+    await tester.pageBack();
+    await tester.pumpAndSettle();
 
     await tester.tap(find.text('Iniciar sesión'));
     await tester.pumpAndSettle();
