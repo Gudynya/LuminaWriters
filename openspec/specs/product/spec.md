@@ -1,8 +1,8 @@
-# Especificación: producto (LuminaWriters)
+# Especificación: producto (LuminaWriter)
 
 ## Resumen
 
-**LuminaWriters** es una aplicación pensada para **acompañar la escritura creativa**: ofrecer un punto de entrada claro (landing), acceso a cuentas de usuario y un espacio de trabajo posterior al inicio de sesión.
+**LuminaWriter** es una aplicación pensada para **acompañar la escritura creativa**: ofrecer un punto de entrada claro (landing), acceso a cuentas de usuario y un espacio de trabajo posterior al inicio de sesión.
 
 ## Objetivos
 
@@ -19,6 +19,7 @@
 
 - Navegación por rutas con nombre (`MaterialApp` / `routes`).
 - Pantallas de landing, login, registro, recuperación de contraseña y shell principal.
+- **Internacionalización** `ca` / `en` / `es` (ARB, `AppLocalizations`); idioma inicial según navegador o sistema; **selector** (emoji ES/GB + Senyera dibujada para catalán) en landing, login y registro (sin persistencia obligatoria entre sesiones).
 - Pruebas de widget sobre flujos básicos de navegación donde existan.
 
 ## Fuera de alcance (por ahora)

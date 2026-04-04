@@ -1,4 +1,4 @@
-# LuminaWriters
+# LuminaWriter
 
 Aplicación **Flutter** para acompañar el proceso de escritura creativa: landing público, flujo de autenticación (inicio de sesión, registro, recuperación de contraseña) y un shell principal para el área autenticada.
 
@@ -59,7 +59,7 @@ El flujo de autenticación real puede conectarse más adelante a un backend (p. 
 
 ## Desarrollo con Cursor / VS Code
 
-En la raíz del repo hay `launch.json` para depurar con **`cwd`** en `app/` cuando el workspace es la carpeta `LuminaWriters`. Si abres solo la carpeta `app/`, existe también `app/.vscode/launch.json` con rutas relativas a ese proyecto.
+En la raíz del repo hay `launch.json` para depurar con **`cwd`** en `app/` cuando el workspace es la raíz del repositorio. Si abres solo la carpeta `app/`, existe también `app/.vscode/launch.json` con rutas relativas a ese proyecto.
 
 ## OpenSpec
 

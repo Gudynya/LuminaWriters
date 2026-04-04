@@ -3,7 +3,7 @@ schema: spec-driven
 # Contexto del proyecto (se usa al crear artefactos con OpenSpec / IA).
 # Mantener alineado con openspec/README.md y openspec/specs/*/spec.md
 context: |
-  Repositorio: LuminaWriters (monorepo ligero).
+  Producto: LuminaWriter. Repositorio monorepo ligero.
 
   Código de aplicación:
   - Todo el proyecto Flutter vive en la carpeta `app/` (paquete `lumina_writers`).

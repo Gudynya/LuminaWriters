@@ -1,0 +1,49 @@
+{
+  "@@locale": "es",
+  "appTitle": "LuminaWriter",
+  "languageSelectorLabel": "Idioma",
+  "localeSpanishDisplay": "Español",
+  "localeEnglishDisplay": "English",
+  "localeCatalanDisplay": "Catalán",
+  "landingHeadline": "Bienvenido a LuminaWriter, tu asistente de escritura",
+  "landingHeroSubtitle": "Tu compañero de escritura creativa: redacta, pule y brilla.",
+  "landingFooterMotto": "Escribe con luz.",
+  "authLoginWelcomeHeadline": "Bienvenido de nuevo",
+  "authSignUpWelcomeHeadline": "Bienvenido a LuminaWriter",
+  "authLoginIntro": "Inicia sesión para seguir escribiendo.",
+  "authSignUpIntro": "Únete a la comunidad y empieza tu próxima historia.",
+  "authNewUserPrompt": "¿Nuevo aquí?",
+  "authCreateAccountLink": "Crear una cuenta",
+  "authExistingUserPrompt": "¿Ya tienes cuenta?",
+  "tooltipBack": "Atrás",
+  "socialTooltipInstagram": "Instagram",
+  "socialTooltipX": "X",
+  "socialTooltipThreads": "Threads",
+  "authLogIn": "Iniciar sesión",
+  "authSignUp": "Crear cuenta",
+  "authForgotPassword": "¿Olvidaste tu contraseña?",
+  "authLoginTitle": "Iniciar sesión",
+  "authEmailLabel": "Correo electrónico",
+  "authPasswordLabel": "Contraseña",
+  "authSignInButton": "Entrar",
+  "authCreateAccountTitle": "Crear cuenta",
+  "authRegisterButton": "Registrarse",
+  "authRecoverPasswordTitle": "Recuperar contraseña",
+  "authRecoveryInstructions": "Introduce el correo de tu cuenta y te enviaremos un enlace para elegir una contraseña nueva.",
+  "authSendLinkButton": "Enviar enlace",
+  "shellHomeTab": "Inicio",
+  "shellProjectsTab": "Proyectos",
+  "shellLibraryTab": "Biblioteca",
+  "shellSettingsTab": "Ajustes",
+  "appBrandNameShort": "LuminaWriter",
+  "shellDrawerSubtitle": "Tu espacio de escritura",
+  "shellSignOut": "Cerrar sesión",
+  "shellSectionPlaceholder": "El contenido de «{sectionName}» estará disponible pronto.",
+  "@shellSectionPlaceholder": {
+    "placeholders": {
+      "sectionName": {
+        "type": "String"
+      }
+    }
+  }
+}

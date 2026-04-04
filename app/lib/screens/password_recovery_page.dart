@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 class PasswordRecoveryPage extends StatefulWidget {
   const PasswordRecoveryPage({super.key});
 
@@ -19,10 +21,11 @@ class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recuperar contraseña'),
+        title: Text(l10n.authRecoverPasswordTitle),
       ),
       body: SafeArea(
         child: Center(
@@ -32,8 +35,7 @@ class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               children: [
                 Text(
-                  'Introduce el correo de tu cuenta y te enviaremos un enlace para '
-                  'elegir una contraseña nueva.',
+                  l10n.authRecoveryInstructions,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
@@ -43,9 +45,9 @@ class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: false,
-                  decoration: const InputDecoration(
-                    labelText: 'Correo electrónico',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n.authEmailLabel,
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -53,7 +55,7 @@ class _PasswordRecoveryPageState extends State<PasswordRecoveryPage> {
                   onPressed: () {
                     // Conectar envío de enlace cuando exista backend.
                   },
-                  child: const Text('Enviar enlace'),
+                  child: Text(l10n.authSendLinkButton),
                 ),
               ],
             ),

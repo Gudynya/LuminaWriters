@@ -1,11 +1,11 @@
 {
-    "name": "lumina_writers",
-    "short_name": "lumina_writers",
+    "name": "LuminaWriter",
+    "short_name": "LuminaWriter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "LuminaWriter — app Flutter (Android y web).",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
