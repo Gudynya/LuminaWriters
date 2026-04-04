@@ -1,0 +1,32 @@
+{
+  "@@locale": "en",
+  "appTitle": "LuminaWriters",
+  "landingHeadline": "Welcome to LuminaWriter, your writers' assistant",
+  "authLogIn": "Log in",
+  "authSignUp": "Sign up",
+  "authForgotPassword": "Forgot password?",
+  "authLoginTitle": "Log in",
+  "authEmailLabel": "Email",
+  "authPasswordLabel": "Password",
+  "authSignInButton": "Sign in",
+  "authCreateAccountTitle": "Create account",
+  "authRegisterButton": "Sign up",
+  "authRecoverPasswordTitle": "Reset password",
+  "authRecoveryInstructions": "Enter your account email and we will send you a link to set a new password.",
+  "authSendLinkButton": "Send link",
+  "shellHomeTab": "Home",
+  "shellProjectsTab": "Projects",
+  "shellLibraryTab": "Library",
+  "shellSettingsTab": "Settings",
+  "appBrandNameShort": "LuminaWriter",
+  "shellDrawerSubtitle": "Your writing space",
+  "shellSignOut": "Sign out",
+  "shellSectionPlaceholder": "Content for \"{sectionName}\" coming soon.",
+  "@shellSectionPlaceholder": {
+    "placeholders": {
+      "sectionName": {
+        "type": "String"
+      }
+    }
+  }
+}

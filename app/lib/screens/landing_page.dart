@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Texto principal del landing (única fuente de verdad para título y tests).
-const String kLandingHeadline =
-    'Bienvenido a LuminaWriter, tu asistente de escritores';
+import '../l10n/app_localizations.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -11,6 +9,7 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       body: SafeArea(
@@ -29,7 +28,7 @@ class LandingPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    kLandingHeadline,
+                    l10n.landingHeadline,
                     textAlign: TextAlign.center,
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w600,
@@ -42,7 +41,7 @@ class LandingPage extends StatelessWidget {
                     child: FilledButton(
                       onPressed: () =>
                           Navigator.of(context).pushNamed('/login'),
-                      child: const Text('Iniciar sesión'),
+                      child: Text(l10n.authLogIn),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -51,14 +50,14 @@ class LandingPage extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () =>
                           Navigator.of(context).pushNamed('/signup'),
-                      child: const Text('Crear cuenta'),
+                      child: Text(l10n.authSignUp),
                     ),
                   ),
                   const SizedBox(height: 20),
                   TextButton(
                     onPressed: () => Navigator.of(context)
                         .pushNamed('/recover-password'),
-                    child: const Text('¿Olvidaste tu contraseña?'),
+                    child: Text(l10n.authForgotPassword),
                   ),
                 ],
               ),

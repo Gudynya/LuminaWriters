@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -20,9 +22,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Iniciar sesión'),
+        title: Text(l10n.authLoginTitle),
       ),
       body: SafeArea(
         child: Center(
@@ -35,27 +39,26 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: false,
-                  decoration: const InputDecoration(
-                    labelText: 'Correo electrónico',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n.authEmailLabel,
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Contraseña',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n.authPasswordLabel,
+                    border: const OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 24),
                 FilledButton(
                   onPressed: () {
-                    // Sustituir por autenticación real cuando exista backend.
                     Navigator.of(context).pushReplacementNamed('/home');
                   },
-                  child: const Text('Entrar'),
+                  child: Text(l10n.authSignInButton),
                 ),
               ],
             ),

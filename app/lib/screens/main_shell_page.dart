@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 /// Pantalla principal tras el login: [Scaffold] con menú lateral y contenido por sección.
 class MainShellPage extends StatefulWidget {
   const MainShellPage({super.key});
@@ -11,47 +13,53 @@ class MainShellPage extends StatefulWidget {
 class _MainShellPageState extends State<MainShellPage> {
   int _sectionIndex = 0;
 
-  static const List<_MainSection> _sections = [
-    _MainSection(
-      title: 'Inicio',
+  static const List<_MainSectionIcons> _sectionIcons = [
+    _MainSectionIcons(
       icon: Icons.home_outlined,
       selectedIcon: Icons.home_rounded,
     ),
-    _MainSection(
-      title: 'Proyectos',
+    _MainSectionIcons(
       icon: Icons.folder_outlined,
       selectedIcon: Icons.folder_rounded,
     ),
-    _MainSection(
-      title: 'Biblioteca',
+    _MainSectionIcons(
       icon: Icons.menu_book_outlined,
       selectedIcon: Icons.menu_book_rounded,
     ),
-    _MainSection(
-      title: 'Ajustes',
+    _MainSectionIcons(
       icon: Icons.settings_outlined,
       selectedIcon: Icons.settings_rounded,
     ),
   ];
 
+  List<String> _sectionTitles(AppLocalizations l10n) => [
+        l10n.shellHomeTab,
+        l10n.shellProjectsTab,
+        l10n.shellLibraryTab,
+        l10n.shellSettingsTab,
+      ];
+
   void _goToSection(int index) {
     setState(() => _sectionIndex = index);
-    Navigator.of(context).pop(); // Cierra el drawer
+    Navigator.of(context).pop();
   }
 
   void _logout() {
-    Navigator.of(context).pop(); // Cierra el drawer si sigue abierto
+    Navigator.of(context).pop();
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final current = _sections[_sectionIndex];
+    final l10n = AppLocalizations.of(context);
+    final titles = _sectionTitles(l10n);
+    final currentTitle = titles[_sectionIndex];
+    final icons = _sectionIcons[_sectionIndex];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(current.title),
+        title: Text(currentTitle),
       ),
       drawer: Drawer(
         child: SafeArea(
@@ -73,13 +81,13 @@ class _MainShellPageState extends State<MainShellPage> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'LuminaWriter',
+                      l10n.appBrandNameShort,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
-                      'Tu espacio de escritura',
+                      l10n.shellDrawerSubtitle,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                       ),
@@ -91,21 +99,21 @@ class _MainShellPageState extends State<MainShellPage> {
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
-                    for (var i = 0; i < _sections.length; i++)
+                    for (var i = 0; i < _sectionIcons.length; i++)
                       ListTile(
                         leading: Icon(
                           _sectionIndex == i
-                              ? _sections[i].selectedIcon
-                              : _sections[i].icon,
+                              ? _sectionIcons[i].selectedIcon
+                              : _sectionIcons[i].icon,
                         ),
-                        title: Text(_sections[i].title),
+                        title: Text(titles[i]),
                         selected: _sectionIndex == i,
                         onTap: () => _goToSection(i),
                       ),
                     const Divider(),
                     ListTile(
                       leading: const Icon(Icons.logout_rounded),
-                      title: const Text('Cerrar sesión'),
+                      title: Text(l10n.shellSignOut),
                       onTap: _logout,
                     ),
                   ],
@@ -116,28 +124,36 @@ class _MainShellPageState extends State<MainShellPage> {
         ),
       ),
       body: SafeArea(
-        child: _MainSectionBody(section: current),
+        child: _MainSectionBody(
+          sectionTitle: currentTitle,
+          selectedIcon: icons.selectedIcon,
+          l10n: l10n,
+        ),
       ),
     );
   }
 }
 
-class _MainSection {
-  const _MainSection({
-    required this.title,
+class _MainSectionIcons {
+  const _MainSectionIcons({
     required this.icon,
     required this.selectedIcon,
   });
 
-  final String title;
   final IconData icon;
   final IconData selectedIcon;
 }
 
 class _MainSectionBody extends StatelessWidget {
-  const _MainSectionBody({required this.section});
+  const _MainSectionBody({
+    required this.sectionTitle,
+    required this.selectedIcon,
+    required this.l10n,
+  });
 
-  final _MainSection section;
+  final String sectionTitle;
+  final IconData selectedIcon;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -152,13 +168,13 @@ class _MainSectionBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                section.selectedIcon,
+                selectedIcon,
                 size: 64,
                 color: theme.colorScheme.primary.withValues(alpha: 0.85),
               ),
               const SizedBox(height: 16),
               Text(
-                'Contenido de «${section.title}» próximamente.',
+                l10n.shellSectionPlaceholder(sectionTitle),
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,

@@ -9,12 +9,25 @@ El código de aplicación reside en **`app/`** (no en la raíz del monorepo). El
 ```
 app/
   lib/
-    main.dart                 # MaterialApp, rutas, tema
+    main.dart                 # MaterialApp, rutas, tema, i18n
+    l10n/                     # ARB + app_localizations*.dart (gen-l10n)
     screens/                  # Pantallas por archivo
+  l10n.yaml                   # Configuración gen-l10n
   test/                       # widget_test y futuras pruebas
   pubspec.yaml
   android/ , web/             # Plataformas
 ```
+
+## Internacionalización (i18n)
+
+- **Locales soportados:** `es`, `en` (definidos en ARB y `AppLocalizations.supportedLocales`).
+- **Plantilla:** `lib/l10n/app_en.arb`; traducciones: `app_es.arb` (y futuros idiomas como `app_<lang>.arb`).
+- **Configuración:** `l10n.yaml` en `app/`; `flutter: generate: true` en `pubspec.yaml`.
+- **Dependencias:** `flutter_localizations` (SDK), `intl`.
+- **Uso en código:** `AppLocalizations.of(context)` (o el patrón que genere `gen-l10n`); **no** duplicar cadenas visibles fuera de ARB salvo nombres de marca fijos.
+- **Convención de claves:** `lowerCamelCase` descriptivo (`authEmailLabel`, `shellHomeTab`, `shellSectionPlaceholder`, …).
+- **Resolución de locale:** si el idioma del dispositivo no está soportado, se usa **español** como fallback (`localeResolutionCallback` en `MaterialApp`).
+- **Tests:** fijar `MyApp(locale: Locale('es'))` (u otro locale soportado) cuando se aserten textos localizados; usar `AppLocalizations` para obtener cadenas esperadas en lugar de literales sueltos.
 
 ## Rutas
 
@@ -30,7 +43,7 @@ Definidas en `lib/main.dart`:
 
 ## Convenciones
 
-- **Nombres:** archivos `snake_case`, clases `UpperCamelCase`, constantes públicas para textos usados en tests (`kLanding…`, etc. cuando aplique).
+- **Nombres:** archivos `snake_case`, clases `UpperCamelCase`; textos de UI en **ARB** / `AppLocalizations` (no constantes `k…` salvo excepciones documentadas).
 - **Navegación:** `Navigator.pushNamed` / `pushReplacementNamed` según si el flujo debe sustituir la pila.
 - **Tema:** `ThemeData` con `ColorScheme.fromSeed` (semilla actual orientada a púrpura); mantener coherencia al añadir nuevas pantallas.
 - **Dependencias:** declarar en `app/pubspec.yaml`; preferir paquetes mantenidos y revisar implicaciones en **web** (p. ej. fuentes de iconos o plugins).
