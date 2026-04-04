@@ -101,13 +101,31 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'LuminaWriters'**
+  /// **'LuminaWriter'**
   String get appTitle;
+
+  /// No description provided for @languageSelectorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageSelectorLabel;
+
+  /// No description provided for @localeSpanishDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Español'**
+  String get localeSpanishDisplay;
+
+  /// No description provided for @localeEnglishDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get localeEnglishDisplay;
 
   /// No description provided for @landingHeadline.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to LuminaWriter, your writers\' assistant'**
+  /// **'Welcome to LuminaWriter, your writing assistant'**
   String get landingHeadline;
 
   /// No description provided for @landingHeroSubtitle.
@@ -131,7 +149,7 @@ abstract class AppLocalizations {
   /// No description provided for @authSignUpWelcomeHeadline.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to LuminaWriters'**
+  /// **'Welcome to LuminaWriter'**
   String get authSignUpWelcomeHeadline;
 
   /// No description provided for @authLoginIntro.
@@ -251,7 +269,7 @@ abstract class AppLocalizations {
   /// No description provided for @authRecoveryInstructions.
   ///
   /// In en, this message translates to:
-  /// **'Enter your account email and we will send you a link to set a new password.'**
+  /// **'Enter your email address and we\'ll send you a link to reset your password.'**
   String get authRecoveryInstructions;
 
   /// No description provided for @authSendLinkButton.
@@ -305,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @shellSectionPlaceholder.
   ///
   /// In en, this message translates to:
-  /// **'Content for \"{sectionName}\" coming soon.'**
+  /// **'Content for {sectionName} is coming soon.'**
   String shellSectionPlaceholder(String sectionName);
 }
 

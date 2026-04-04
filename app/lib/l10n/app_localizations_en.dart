@@ -9,11 +9,20 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'LuminaWriters';
+  String get appTitle => 'LuminaWriter';
+
+  @override
+  String get languageSelectorLabel => 'Language';
+
+  @override
+  String get localeSpanishDisplay => 'Español';
+
+  @override
+  String get localeEnglishDisplay => 'English';
 
   @override
   String get landingHeadline =>
-      'Welcome to LuminaWriter, your writers\' assistant';
+      'Welcome to LuminaWriter, your writing assistant';
 
   @override
   String get landingHeroSubtitle =>
@@ -26,7 +35,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authLoginWelcomeHeadline => 'Welcome back';
 
   @override
-  String get authSignUpWelcomeHeadline => 'Welcome to LuminaWriters';
+  String get authSignUpWelcomeHeadline => 'Welcome to LuminaWriter';
 
   @override
   String get authLoginIntro => 'Sign in to continue writing.';
@@ -87,7 +96,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authRecoveryInstructions =>
-      'Enter your account email and we will send you a link to set a new password.';
+      'Enter your email address and we\'ll send you a link to reset your password.';
 
   @override
   String get authSendLinkButton => 'Send link';
@@ -115,6 +124,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String shellSectionPlaceholder(String sectionName) {
-    return 'Content for \"$sectionName\" coming soon.';
+    return 'Content for $sectionName is coming soon.';
   }
 }

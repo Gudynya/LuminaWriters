@@ -1,11 +1,14 @@
 {
   "@@locale": "en",
-  "appTitle": "LuminaWriters",
-  "landingHeadline": "Welcome to LuminaWriter, your writers' assistant",
+  "appTitle": "LuminaWriter",
+  "languageSelectorLabel": "Language",
+  "localeSpanishDisplay": "Español",
+  "localeEnglishDisplay": "English",
+  "landingHeadline": "Welcome to LuminaWriter, your writing assistant",
   "landingHeroSubtitle": "Your creative writing companion — draft, refine, and shine.",
   "landingFooterMotto": "Write with light.",
   "authLoginWelcomeHeadline": "Welcome back",
-  "authSignUpWelcomeHeadline": "Welcome to LuminaWriters",
+  "authSignUpWelcomeHeadline": "Welcome to LuminaWriter",
   "authLoginIntro": "Sign in to continue writing.",
   "authSignUpIntro": "Join the community and start your next story.",
   "authNewUserPrompt": "New here?",
@@ -25,7 +28,7 @@
   "authCreateAccountTitle": "Create account",
   "authRegisterButton": "Sign up",
   "authRecoverPasswordTitle": "Reset password",
-  "authRecoveryInstructions": "Enter your account email and we will send you a link to set a new password.",
+  "authRecoveryInstructions": "Enter your email address and we'll send you a link to reset your password.",
   "authSendLinkButton": "Send link",
   "shellHomeTab": "Home",
   "shellProjectsTab": "Projects",
@@ -34,7 +37,7 @@
   "appBrandNameShort": "LuminaWriter",
   "shellDrawerSubtitle": "Your writing space",
   "shellSignOut": "Sign out",
-  "shellSectionPlaceholder": "Content for \"{sectionName}\" coming soon.",
+  "shellSectionPlaceholder": "Content for {sectionName} is coming soon.",
   "@shellSectionPlaceholder": {
     "placeholders": {
       "sectionName": {

@@ -1,4 +1,4 @@
-# OpenSpec en LuminaWriters
+# OpenSpec en LuminaWriter
 
 Esta carpeta concentra la **especificación** del proyecto y el flujo **spec-driven** (OpenSpec). Sirve para que personas y herramientas (incluida la IA en Cursor) compartan la misma visión del producto y del código.
 

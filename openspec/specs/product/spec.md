@@ -1,8 +1,8 @@
-# Especificación: producto (LuminaWriters)
+# Especificación: producto (LuminaWriter)
 
 ## Resumen
 
-**LuminaWriters** es una aplicación pensada para **acompañar la escritura creativa**: ofrecer un punto de entrada claro (landing), acceso a cuentas de usuario y un espacio de trabajo posterior al inicio de sesión.
+**LuminaWriter** es una aplicación pensada para **acompañar la escritura creativa**: ofrecer un punto de entrada claro (landing), acceso a cuentas de usuario y un espacio de trabajo posterior al inicio de sesión.
 
 ## Objetivos
 

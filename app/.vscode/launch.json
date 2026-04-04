@@ -2,28 +2,28 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "LuminaWriters (Chrome)",
+      "name": "LuminaWriter (Chrome)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "toolArgs": ["-d", "chrome"]
     },
     {
-      "name": "LuminaWriters (Windows)",
+      "name": "LuminaWriter (Windows)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "toolArgs": ["-d", "windows"]
     },
     {
-      "name": "LuminaWriters (Android)",
+      "name": "LuminaWriter (Android)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
       "toolArgs": ["-d", "android"]
     },
     {
-      "name": "LuminaWriters (Chrome, perfil)",
+      "name": "LuminaWriter (Chrome, perfil)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",
@@ -31,7 +31,7 @@
       "toolArgs": ["-d", "chrome"]
     },
     {
-      "name": "LuminaWriters (Chrome + Supabase desde env)",
+      "name": "LuminaWriter (Chrome + Supabase desde env)",
       "type": "dart",
       "request": "launch",
       "program": "lib/main.dart",

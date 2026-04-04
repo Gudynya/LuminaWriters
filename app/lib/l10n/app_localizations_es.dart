@@ -9,11 +9,20 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'LuminaWriters';
+  String get appTitle => 'LuminaWriter';
+
+  @override
+  String get languageSelectorLabel => 'Idioma';
+
+  @override
+  String get localeSpanishDisplay => 'Español';
+
+  @override
+  String get localeEnglishDisplay => 'English';
 
   @override
   String get landingHeadline =>
-      'Bienvenido a LuminaWriter, tu asistente de escritores';
+      'Bienvenido a LuminaWriter, tu asistente de escritura';
 
   @override
   String get landingHeroSubtitle =>
@@ -26,7 +35,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get authLoginWelcomeHeadline => 'Bienvenido de nuevo';
 
   @override
-  String get authSignUpWelcomeHeadline => 'Bienvenido a LuminaWriters';
+  String get authSignUpWelcomeHeadline => 'Bienvenido a LuminaWriter';
 
   @override
   String get authLoginIntro => 'Inicia sesión para seguir escribiendo.';
@@ -116,6 +125,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String shellSectionPlaceholder(String sectionName) {
-    return 'Contenido de «$sectionName» próximamente.';
+    return 'El contenido de «$sectionName» estará disponible pronto.';
   }
 }

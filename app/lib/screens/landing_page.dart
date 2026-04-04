@@ -8,7 +8,7 @@ import '../l10n/app_localizations.dart';
 const String kLandingHeroImageUrl =
     'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1400&q=80';
 
-/// Enlaces sociales (ajusta a las cuentas reales de LuminaWriters).
+/// Enlaces sociales (ajusta a las cuentas reales de LuminaWriter).
 const String kSocialInstagramUrl = 'https://www.instagram.com/luminawriters/';
 const String kSocialXUrl = 'https://x.com/luminawriters';
 const String kSocialThreadsUrl = 'https://www.threads.net/@luminawriters';
@@ -18,8 +18,21 @@ Future<void> _openExternalUrl(String url) async {
   await launchUrl(uri, mode: LaunchMode.externalApplication);
 }
 
+/// Coincide con [AppLocalizations.supportedLocales] usando solo el código de idioma.
+Locale _supportedLocaleFrom(BuildContext context) {
+  final loc = Localizations.localeOf(context);
+  for (final l in AppLocalizations.supportedLocales) {
+    if (l.languageCode == loc.languageCode) {
+      return Locale(loc.languageCode);
+    }
+  }
+  return const Locale('es');
+}
+
 class LandingPage extends StatelessWidget {
-  const LandingPage({super.key});
+  const LandingPage({super.key, this.onLocaleChanged});
+
+  final ValueChanged<Locale>? onLocaleChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +47,11 @@ class LandingPage extends StatelessWidget {
         children: [
           SafeArea(
             bottom: false,
-            child: _LandingHeader(colorScheme: colorScheme, l10n: l10n),
+            child: _LandingHeader(
+              colorScheme: colorScheme,
+              l10n: l10n,
+              onLocaleChanged: onLocaleChanged,
+            ),
           ),
           Expanded(
             child: _HeroImage(
@@ -53,16 +70,46 @@ class _LandingHeader extends StatelessWidget {
   const _LandingHeader({
     required this.colorScheme,
     required this.l10n,
+    this.onLocaleChanged,
   });
 
   final ColorScheme colorScheme;
   final AppLocalizations l10n;
+  final ValueChanged<Locale>? onLocaleChanged;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final narrow = constraints.maxWidth < 420;
+        final languageSelector = Tooltip(
+          message: l10n.languageSelectorLabel,
+          child: SegmentedButton<Locale>(
+            showSelectedIcon: false,
+            style: SegmentedButton.styleFrom(
+              visualDensity: VisualDensity.compact,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            segments: [
+              ButtonSegment<Locale>(
+                value: const Locale('es'),
+                label: Text(l10n.localeSpanishDisplay),
+              ),
+              ButtonSegment<Locale>(
+                value: const Locale('en'),
+                label: Text(l10n.localeEnglishDisplay),
+              ),
+            ],
+            selected: {_supportedLocaleFrom(context)},
+            onSelectionChanged: onLocaleChanged == null
+                ? null
+                : (Set<Locale> next) {
+                    if (next.isNotEmpty) {
+                      onLocaleChanged!(next.first);
+                    }
+                  },
+          ),
+        );
         final brand = Row(
           children: [
             Icon(
@@ -105,17 +152,22 @@ class _LandingHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     brand,
-                    const SizedBox(height: 12),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: actions,
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        languageSelector,
+                        const Spacer(),
+                        actions,
+                      ],
                     ),
                   ],
                 )
               : Row(
                   children: [
                     Expanded(child: brand),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
+                    languageSelector,
+                    const SizedBox(width: 8),
                     actions,
                   ],
                 ),
