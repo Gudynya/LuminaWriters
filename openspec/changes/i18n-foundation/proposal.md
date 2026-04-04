@@ -12,8 +12,9 @@ Establecer las **bases de internacionalización (i18n)** en el cliente Flutter (
 ## Alcance (v1 de este cambio)
 
 - **Idiomas iniciales:** `es` (español) y `en` (inglés), como `supportedLocales`.
-- **Resolución de locale:** seguir al **sistema** (`localeListResolutionCallback` / comportamiento por defecto de Flutter) salvo que el diseño decida otra cosa en `design.md`.
-- **Selector de idioma en UI:** **fuera de alcance** en la primera entrega de este cambio, salvo decisión explícita en diseño; se puede añadir después con persistencia (`shared_preferences` u otro).
+- **Resolución de locale:** locale inicial desde el **sistema** / **navegador** (`platformDispatcher.locale`); fallback documentado en `design.md` y `localeResolutionCallback` en `MaterialApp`.
+- **Selector de idioma en UI:** implementado en el **landing**: esquina inferior derecha, selección por **banderas** (emoji). La persistencia del idioma entre sesiones (**`shared_preferences`** u otro) sigue siendo **opcional** y no forma parte de la entrega mínima.
+- **Nombre de producto:** cadena visible unificada como **LuminaWriter** (ARB, web, Android `label`, documentación).
 - **Contenido remoto** (API, CMS): fuera de alcance; solo strings de la app.
 
 ## No-objetivos

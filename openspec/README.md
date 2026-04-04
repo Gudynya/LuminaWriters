@@ -8,7 +8,7 @@ Esta carpeta concentra la **especificación** del proyecto y el flujo **spec-dri
 |------|-----|
 | [`config.yaml`](config.yaml) | Esquema (`spec-driven`) y **contexto del proyecto** inyectado al generar artefactos |
 | [`specs/`](specs/) | Especificaciones **estables** por capacidad (`<capability>/spec.md`) |
-| [`changes/`](changes/) | Cambios propuestos (`openspec new change <nombre>`). Vacío hasta que existan cambios activos |
+| [`changes/`](changes/) | Cambios propuestos o en curso (`<nombre>/`: `proposal.md`, `design.md`, `tasks.md`; p. ej. `i18n-foundation`) |
 | Este `README.md` | Mapa de la carpeta y enlaces |
 
 ## Especificaciones (`specs/`)

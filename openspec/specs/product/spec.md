@@ -19,6 +19,7 @@
 
 - Navegación por rutas con nombre (`MaterialApp` / `routes`).
 - Pantallas de landing, login, registro, recuperación de contraseña y shell principal.
+- **Internacionalización** `es` / `en` (ARB, `AppLocalizations`); idioma inicial según navegador o sistema; **selector con banderas** en el landing (sin persistencia obligatoria entre sesiones).
 - Pruebas de widget sobre flujos básicos de navegación donde existan.
 
 ## Fuera de alcance (por ahora)

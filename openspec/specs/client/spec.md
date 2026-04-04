@@ -2,7 +2,7 @@
 
 ## Resumen
 
-El código de aplicación reside en **`app/`** (no en la raíz del monorepo). El paquete se llama **`lumina_writers`**, usa **Dart ^3.11.4**, **Flutter** con **Material 3** y apunta a **Android** y **web**.
+El código de aplicación reside en **`app/`** (no en la raíz del monorepo). El paquete Dart se llama **`lumina_writers`**; el **nombre visible del producto** es **LuminaWriter**. Usa **Dart ^3.11.4**, **Flutter** con **Material 3** y apunta a **Android** y **web**.
 
 ## Estructura relevante
 
@@ -23,10 +23,12 @@ app/
 - **Locales soportados:** `es`, `en` (definidos en ARB y `AppLocalizations.supportedLocales`).
 - **Plantilla:** `lib/l10n/app_en.arb`; traducciones: `app_es.arb` (y futuros idiomas como `app_<lang>.arb`).
 - **Configuración:** `l10n.yaml` en `app/`; `flutter: generate: true` en `pubspec.yaml`.
-- **Dependencias:** `flutter_localizations` (SDK), `intl`.
+- **Dependencias:** `flutter_localizations` (SDK), `intl`; en el landing también `font_awesome_flutter` y `url_launcher` (iconos sociales y enlaces externos).
 - **Uso en código:** `AppLocalizations.of(context)` (o el patrón que genere `gen-l10n`); **no** duplicar cadenas visibles fuera de ARB salvo nombres de marca fijos.
-- **Convención de claves:** `lowerCamelCase` descriptivo (`authEmailLabel`, `shellHomeTab`, `shellSectionPlaceholder`, …).
-- **Resolución de locale:** si el idioma del dispositivo no está soportado, se usa **español** como fallback (`localeResolutionCallback` en `MaterialApp`).
+- **Convención de claves:** `lowerCamelCase` descriptivo (`authEmailLabel`, `shellHomeTab`, `shellSectionPlaceholder`, `languageSelectorLabel`, …).
+- **`MyApp` (`lib/main.dart`):** widget **con estado** que mantiene el `locale` activo. Si el constructor recibe `locale` explícito (p. ej. tests), se usa ese valor; si no, el locale inicial se obtiene de **`WidgetsBinding.instance.platformDispatcher.locale`** (en **web** suele coincidir con el idioma del **navegador**). El usuario puede cambiar el idioma desde el **landing**; el estado se actualiza con `setState` (no hay persistencia entre sesiones salvo que se añada después, p. ej. `shared_preferences`).
+- **Selector en el landing (`LandingPage`):** esquina **inferior derecha** de la pantalla, banderas **emoji** (🇪🇸 español, 🇬🇧 inglés) con tooltips accesibles; la franja inferior del hero reserva ancho para no solapar el lema con el selector.
+- **Resolución de locale:** además del locale guardado en `MaterialApp`, `localeResolutionCallback` mantiene el fallback a **español** si el idioma del sistema no está soportado.
 - **Tests:** fijar `MyApp(locale: Locale('es'))` (u otro locale soportado) cuando se aserten textos localizados; usar `AppLocalizations` para obtener cadenas esperadas en lugar de literales sueltos.
 
 ## Rutas
@@ -35,7 +37,7 @@ Definidas en `lib/main.dart`:
 
 | Ruta | Pantalla | Notas |
 |------|----------|--------|
-| `/` | `LandingPage` | Entrada pública |
+| `/` | `LandingPage` | Entrada pública; selector de idioma (banderas) y hero a pantalla completa |
 | `/login` | `LoginPage` | Credenciales; puede sustituir por `/home` en demo |
 | `/signup` | `SignUpPage` | Registro |
 | `/recover-password` | `PasswordRecoveryPage` | Enlace de recuperación |
