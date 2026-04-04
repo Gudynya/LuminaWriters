@@ -1,0 +1,49 @@
+{
+  "@@locale": "ca",
+  "appTitle": "LuminaWriter",
+  "languageSelectorLabel": "Idioma",
+  "localeSpanishDisplay": "Castellà",
+  "localeEnglishDisplay": "Anglès",
+  "localeCatalanDisplay": "Català",
+  "landingHeadline": "Benvingut a LuminaWriter, el teu assistent d'escriptura",
+  "landingHeroSubtitle": "El teu company d'escriptura creativa: redacta, polimenta i brilla.",
+  "landingFooterMotto": "Escriu amb llum.",
+  "authLoginWelcomeHeadline": "Benvingut de nou",
+  "authSignUpWelcomeHeadline": "Benvingut a LuminaWriter",
+  "authLoginIntro": "Inicia la sessió per continuar escrivint.",
+  "authSignUpIntro": "Uneix-te a la comunitat i comença la teva pròxima història.",
+  "authNewUserPrompt": "Nou aquí?",
+  "authCreateAccountLink": "Crea un compte",
+  "authExistingUserPrompt": "Ja tens compte?",
+  "tooltipBack": "Enrere",
+  "socialTooltipInstagram": "Instagram",
+  "socialTooltipX": "X",
+  "socialTooltipThreads": "Threads",
+  "authLogIn": "Inicia la sessió",
+  "authSignUp": "Crea un compte",
+  "authForgotPassword": "Has oblidat la contrasenya?",
+  "authLoginTitle": "Inicia la sessió",
+  "authEmailLabel": "Correu electrònic",
+  "authPasswordLabel": "Contrasenya",
+  "authSignInButton": "Entra",
+  "authCreateAccountTitle": "Crea un compte",
+  "authRegisterButton": "Registra't",
+  "authRecoverPasswordTitle": "Restableix la contrasenya",
+  "authRecoveryInstructions": "Introdueix el correu del teu compte i t'enviarem un enllaç per restablir la contrasenya.",
+  "authSendLinkButton": "Envia l'enllaç",
+  "shellHomeTab": "Inici",
+  "shellProjectsTab": "Projectes",
+  "shellLibraryTab": "Biblioteca",
+  "shellSettingsTab": "Configuració",
+  "appBrandNameShort": "LuminaWriter",
+  "shellDrawerSubtitle": "El teu espai d'escriptura",
+  "shellSignOut": "Tanca la sessió",
+  "shellSectionPlaceholder": "El contingut de «{sectionName}» estarà disponible aviat.",
+  "@shellSectionPlaceholder": {
+    "placeholders": {
+      "sectionName": {
+        "type": "String"
+      }
+    }
+  }
+}

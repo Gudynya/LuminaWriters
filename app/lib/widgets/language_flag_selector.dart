@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import 'catalunya_senyera_flag.dart';
 
-/// Banderas como secuencias Unicode (español / inglés).
+/// Banderas Unicode estándar (es / en). Catalán: [SenyeraFlag] (cas puntual, ver archivo).
 const String kFlagEmojiEs = '🇪🇸';
 const String kFlagEmojiEn = '🇬🇧';
+
+/// Diámetro visual del chip circular (emoji / senyera).
+const double _kFlagChipDiameter = 36;
 
 /// Coincide con [AppLocalizations.supportedLocales] usando solo el código de idioma.
 Locale supportedLocaleFromContext(BuildContext context) {
@@ -17,7 +21,7 @@ Locale supportedLocaleFromContext(BuildContext context) {
   return const Locale('es');
 }
 
-/// Selector compacto con banderas (emoji), típicamente en esquina inferior derecha.
+/// Selector compacto: mismos chips circulares para ES, EN y CA.
 class LanguageFlagSelector extends StatelessWidget {
   const LanguageFlagSelector({
     super.key,
@@ -43,7 +47,7 @@ class LanguageFlagSelector extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _FlagButton(
+              _LocaleChip(
                 locale: const Locale('es'),
                 emoji: kFlagEmojiEs,
                 tooltip: l10n.localeSpanishDisplay,
@@ -51,11 +55,19 @@ class LanguageFlagSelector extends StatelessWidget {
                 onSelected: onLocaleChanged,
               ),
               const SizedBox(width: 4),
-              _FlagButton(
+              _LocaleChip(
                 locale: const Locale('en'),
                 emoji: kFlagEmojiEn,
                 tooltip: l10n.localeEnglishDisplay,
                 selected: current.languageCode == 'en',
+                onSelected: onLocaleChanged,
+              ),
+              const SizedBox(width: 4),
+              _LocaleChip(
+                locale: const Locale('ca'),
+                customFlag: const SenyeraFlag(size: 26),
+                tooltip: l10n.localeCatalanDisplay,
+                selected: current.languageCode == 'ca',
                 onSelected: onLocaleChanged,
               ),
             ],
@@ -66,47 +78,73 @@ class LanguageFlagSelector extends StatelessWidget {
   }
 }
 
-class _FlagButton extends StatelessWidget {
-  const _FlagButton({
+class _LocaleChip extends StatelessWidget {
+  const _LocaleChip({
     required this.locale,
-    required this.emoji,
     required this.tooltip,
     required this.selected,
     this.onSelected,
-  });
+    this.emoji,
+    this.customFlag,
+  }) : assert(
+          (emoji != null) ^ (customFlag != null),
+          'Provide exactly one of emoji or customFlag',
+        );
 
   final Locale locale;
-  final String emoji;
   final String tooltip;
   final bool selected;
   final ValueChanged<Locale>? onSelected;
+  final String? emoji;
+  final Widget? customFlag;
 
   @override
   Widget build(BuildContext context) {
+    final borderColor = selected
+        ? Colors.white
+        : Colors.white.withValues(alpha: 0.4);
+    final borderWidth = selected ? 2.5 : 1.0;
+
     return Tooltip(
       message: tooltip,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
+          customBorder: const CircleBorder(),
           onTap: onSelected == null ? null : () => onSelected!(locale),
-          borderRadius: BorderRadius.circular(22),
-          child: Padding(
-            padding: const EdgeInsets.all(6),
+          child: SizedBox(
+            width: _kFlagChipDiameter,
+            height: _kFlagChipDiameter,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
+                shape: BoxShape.circle,
                 border: Border.all(
-                  color: selected
-                      ? Colors.white
-                      : Colors.white.withValues(alpha: 0.35),
-                  width: selected ? 2 : 1,
+                  color: borderColor,
+                  width: borderWidth,
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.25),
+                    blurRadius: 3,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                child: Text(
-                  emoji,
-                  style: const TextStyle(fontSize: 26, height: 1.1),
+              child: ClipOval(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.5),
+                  child: Center(
+                    child: emoji != null
+                        ? Text(
+                            emoji!,
+                            style: const TextStyle(
+                              fontSize: 22,
+                              height: 1.0,
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        : customFlag!,
+                  ),
                 ),
               ),
             ),

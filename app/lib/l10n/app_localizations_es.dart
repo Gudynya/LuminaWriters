@@ -21,6 +21,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get localeEnglishDisplay => 'English';
 
   @override
+  String get localeCatalanDisplay => 'Catalán';
+
+  @override
   String get landingHeadline =>
       'Bienvenido a LuminaWriter, tu asistente de escritura';
 

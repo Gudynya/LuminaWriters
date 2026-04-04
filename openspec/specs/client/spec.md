@@ -20,14 +20,14 @@ app/
 
 ## Internacionalización (i18n)
 
-- **Locales soportados:** `es`, `en` (definidos en ARB y `AppLocalizations.supportedLocales`).
-- **Plantilla:** `lib/l10n/app_en.arb`; traducciones: `app_es.arb` (y futuros idiomas como `app_<lang>.arb`).
+- **Locales soportados:** `ca` (catalán), `en`, `es` (definidos en ARB y `AppLocalizations.supportedLocales`).
+- **Plantilla:** `lib/l10n/app_en.arb`; traducciones: `app_ca.arb`, `app_es.arb` (y futuros `app_<lang>.arb`).
 - **Configuración:** `l10n.yaml` en `app/`; `flutter: generate: true` en `pubspec.yaml`.
 - **Dependencias:** `flutter_localizations` (SDK), `intl`; en el landing también `font_awesome_flutter` y `url_launcher` (iconos sociales y enlaces externos).
 - **Uso en código:** `AppLocalizations.of(context)` (o el patrón que genere `gen-l10n`); **no** duplicar cadenas visibles fuera de ARB salvo nombres de marca fijos.
 - **Convención de claves:** `lowerCamelCase` descriptivo (`authEmailLabel`, `shellHomeTab`, `shellSectionPlaceholder`, `languageSelectorLabel`, …).
 - **`MyApp` (`lib/main.dart`):** widget **con estado** que mantiene el `locale` activo. Si el constructor recibe `locale` explícito (p. ej. tests), se usa ese valor; si no, el locale inicial se obtiene de **`WidgetsBinding.instance.platformDispatcher.locale`** (en **web** suele coincidir con el idioma del **navegador**). El usuario puede cambiar el idioma desde el **landing**; el estado se actualiza con `setState` (no hay persistencia entre sesiones salvo que se añada después, p. ej. `shared_preferences`).
-- **Selector en el landing (`LandingPage`):** esquina **inferior derecha** de la pantalla, banderas **emoji** (🇪🇸 español, 🇬🇧 inglés) con tooltips accesibles; la franja inferior del hero reserva ancho para no solapar el lema con el selector.
+- **Selector de idioma** (`LanguageFlagSelector` en landing, login y registro): esquina **inferior derecha**, banderas **emoji** estándar (🇪🇸, 🇬🇧) y para catalán el widget **`SenyeraFlag`** (`lib/widgets/catalunya_senyera_flag.dart`): Senyera dibujada en código (cas puntual; sin emoji oficial estable); tooltips desde ARB; en el landing la franja inferior del hero reserva ancho para no solapar el lema.
 - **Resolución de locale:** además del locale guardado en `MaterialApp`, `localeResolutionCallback` mantiene el fallback a **español** si el idioma del sistema no está soportado.
 - **Tests:** fijar `MyApp(locale: Locale('es'))` (u otro locale soportado) cuando se aserten textos localizados; usar `AppLocalizations` para obtener cadenas esperadas en lugar de literales sueltos.
 

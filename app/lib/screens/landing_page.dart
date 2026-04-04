@@ -14,8 +14,8 @@ const String kSocialInstagramUrl = 'https://www.instagram.com/luminawriters/';
 const String kSocialXUrl = 'https://x.com/luminawriters';
 const String kSocialThreadsUrl = 'https://www.threads.net/@luminawriters';
 
-/// Ancho reservado en la franja inferior del hero para no solapar el lema con las banderas.
-const double _kLanguageFlagsReserveWidth = 104;
+/// Ancho reservado en la franja inferior del hero para no solapar el lema con el selector (3 idiomas).
+const double _kLanguageFlagsReserveWidth = 156;
 
 Future<void> _openExternalUrl(String url) async {
   final uri = Uri.parse(url);
