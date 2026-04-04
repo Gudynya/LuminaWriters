@@ -16,6 +16,46 @@ class AppLocalizationsEn extends AppLocalizations {
       'Welcome to LuminaWriter, your writers\' assistant';
 
   @override
+  String get landingHeroSubtitle =>
+      'Your creative writing companion — draft, refine, and shine.';
+
+  @override
+  String get landingFooterMotto => 'Write with light.';
+
+  @override
+  String get authLoginWelcomeHeadline => 'Welcome back';
+
+  @override
+  String get authSignUpWelcomeHeadline => 'Welcome to LuminaWriters';
+
+  @override
+  String get authLoginIntro => 'Sign in to continue writing.';
+
+  @override
+  String get authSignUpIntro => 'Join the community and start your next story.';
+
+  @override
+  String get authNewUserPrompt => 'New here?';
+
+  @override
+  String get authCreateAccountLink => 'Create an account';
+
+  @override
+  String get authExistingUserPrompt => 'Already have an account?';
+
+  @override
+  String get tooltipBack => 'Back';
+
+  @override
+  String get socialTooltipInstagram => 'Instagram';
+
+  @override
+  String get socialTooltipX => 'X';
+
+  @override
+  String get socialTooltipThreads => 'Threads';
+
+  @override
   String get authLogIn => 'Log in';
 
   @override

@@ -110,6 +110,84 @@ abstract class AppLocalizations {
   /// **'Welcome to LuminaWriter, your writers\' assistant'**
   String get landingHeadline;
 
+  /// No description provided for @landingHeroSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your creative writing companion — draft, refine, and shine.'**
+  String get landingHeroSubtitle;
+
+  /// No description provided for @landingFooterMotto.
+  ///
+  /// In en, this message translates to:
+  /// **'Write with light.'**
+  String get landingFooterMotto;
+
+  /// No description provided for @authLoginWelcomeHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get authLoginWelcomeHeadline;
+
+  /// No description provided for @authSignUpWelcomeHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to LuminaWriters'**
+  String get authSignUpWelcomeHeadline;
+
+  /// No description provided for @authLoginIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue writing.'**
+  String get authLoginIntro;
+
+  /// No description provided for @authSignUpIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the community and start your next story.'**
+  String get authSignUpIntro;
+
+  /// No description provided for @authNewUserPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'New here?'**
+  String get authNewUserPrompt;
+
+  /// No description provided for @authCreateAccountLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an account'**
+  String get authCreateAccountLink;
+
+  /// No description provided for @authExistingUserPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get authExistingUserPrompt;
+
+  /// No description provided for @tooltipBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get tooltipBack;
+
+  /// No description provided for @socialTooltipInstagram.
+  ///
+  /// In en, this message translates to:
+  /// **'Instagram'**
+  String get socialTooltipInstagram;
+
+  /// No description provided for @socialTooltipX.
+  ///
+  /// In en, this message translates to:
+  /// **'X'**
+  String get socialTooltipX;
+
+  /// No description provided for @socialTooltipThreads.
+  ///
+  /// In en, this message translates to:
+  /// **'Threads'**
+  String get socialTooltipThreads;
+
   /// No description provided for @authLogIn.
   ///
   /// In en, this message translates to:

@@ -16,6 +16,47 @@ class AppLocalizationsEs extends AppLocalizations {
       'Bienvenido a LuminaWriter, tu asistente de escritores';
 
   @override
+  String get landingHeroSubtitle =>
+      'Tu compañero de escritura creativa: redacta, pule y brilla.';
+
+  @override
+  String get landingFooterMotto => 'Escribe con luz.';
+
+  @override
+  String get authLoginWelcomeHeadline => 'Bienvenido de nuevo';
+
+  @override
+  String get authSignUpWelcomeHeadline => 'Bienvenido a LuminaWriters';
+
+  @override
+  String get authLoginIntro => 'Inicia sesión para seguir escribiendo.';
+
+  @override
+  String get authSignUpIntro =>
+      'Únete a la comunidad y empieza tu próxima historia.';
+
+  @override
+  String get authNewUserPrompt => '¿Nuevo aquí?';
+
+  @override
+  String get authCreateAccountLink => 'Crear una cuenta';
+
+  @override
+  String get authExistingUserPrompt => '¿Ya tienes cuenta?';
+
+  @override
+  String get tooltipBack => 'Atrás';
+
+  @override
+  String get socialTooltipInstagram => 'Instagram';
+
+  @override
+  String get socialTooltipX => 'X';
+
+  @override
+  String get socialTooltipThreads => 'Threads';
+
+  @override
   String get authLogIn => 'Iniciar sesión';
 
   @override
