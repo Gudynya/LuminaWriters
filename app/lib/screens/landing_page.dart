@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Texto principal del hero (única fuente de verdad para tests).
 const String kLandingWelcome = 'Welcome to LuminaWriters';
@@ -6,6 +8,16 @@ const String kLandingWelcome = 'Welcome to LuminaWriters';
 /// Imagen de hero (libre de uso vía Unsplash; sustituye por asset local si prefieres offline).
 const String kLandingHeroImageUrl =
     'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=1400&q=80';
+
+/// Enlaces sociales (ajusta a las cuentas reales de LuminaWriters).
+const String kSocialInstagramUrl = 'https://www.instagram.com/luminawriters/';
+const String kSocialXUrl = 'https://x.com/luminawriters';
+const String kSocialThreadsUrl = 'https://www.threads.net/@luminawriters';
+
+Future<void> _openExternalUrl(String url) async {
+  final uri = Uri.parse(url);
+  await launchUrl(uri, mode: LaunchMode.externalApplication);
+}
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -192,24 +204,88 @@ class _HeroImage extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 20,
-          right: 20,
-          bottom: 20 + bottomInset,
-          child: Text(
-            'Write with light.',
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              shadows: [
-                Shadow(
-                  color: Colors.black.withValues(alpha: 0.45),
-                  blurRadius: 12,
+          left: 16,
+          right: 16,
+          bottom: 16 + bottomInset,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              _SocialIconLink(
+                tooltip: 'Instagram',
+                icon: FontAwesomeIcons.instagram,
+                url: kSocialInstagramUrl,
+              ),
+              const SizedBox(width: 4),
+              _SocialIconLink(
+                tooltip: 'X',
+                icon: FontAwesomeIcons.xTwitter,
+                url: kSocialXUrl,
+              ),
+              const SizedBox(width: 4),
+              _SocialIconLink(
+                tooltip: 'Threads',
+                icon: FontAwesomeIcons.threads,
+                url: kSocialThreadsUrl,
+              ),
+              const Spacer(),
+              Flexible(
+                child: Text(
+                  'Write with light.',
+                  textAlign: TextAlign.end,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withValues(alpha: 0.45),
+                        blurRadius: 12,
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class _SocialIconLink extends StatelessWidget {
+  const _SocialIconLink({
+    required this.tooltip,
+    required this.icon,
+    required this.url,
+  });
+
+  final String tooltip;
+  final FaIconData icon;
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      tooltip: tooltip,
+      onPressed: () => _openExternalUrl(url),
+      style: IconButton.styleFrom(
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.all(10),
+        minimumSize: const Size(44, 44),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      ),
+      icon: FaIcon(
+        icon,
+        size: 22,
+        shadows: [
+          Shadow(
+            color: Colors.black.withValues(alpha: 0.45),
+            blurRadius: 8,
+          ),
+        ],
+      ),
     );
   }
 }
