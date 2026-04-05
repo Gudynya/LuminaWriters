@@ -119,6 +119,19 @@ class _MainShellPageState extends State<MainShellPage> {
                         onTap: () => _goToSection(i),
                       ),
                     const Divider(),
+                    if (widget.onLocaleChanged != null)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: LanguageFlagSelector(
+                            l10n: l10n,
+                            onLocaleChanged: widget.onLocaleChanged,
+                            expandWidth: true,
+                            removeBackground: true,
+                          ),
+                        ),
+                      ),
                     ListTile(
                       leading: const Icon(Icons.logout_rounded),
                       title: Text(l10n.shellSignOut),
@@ -160,42 +173,7 @@ class _MainShellPageState extends State<MainShellPage> {
                 ),
               ],
             ),
-            if (widget.onLocaleChanged != null)
-              Positioned(
-                right: 16,
-                bottom: 16 + MediaQuery.paddingOf(context).bottom,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    if (_sectionIndex == 1 && _projectWorkCount >= 7) ...[
-                      Material(
-                        elevation: 2,
-                        shadowColor: Colors.black26,
-                        borderRadius: BorderRadius.circular(16),
-                        clipBehavior: Clip.antiAlias,
-                        child: IconButton.filled(
-                          onPressed: () =>
-                              _projectsSectionKey.currentState?.openEditor(),
-                          tooltip: l10n.projectsAddFabTooltip,
-                          icon: const Icon(Icons.add_rounded),
-                          style: IconButton.styleFrom(
-                            minimumSize: const Size(44, 44),
-                            padding: EdgeInsets.zero,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                    ],
-                    LanguageFlagSelector(
-                      l10n: l10n,
-                      onLocaleChanged: widget.onLocaleChanged,
-                    ),
-                  ],
-                ),
-              )
-            else if (_sectionIndex == 1 && _projectWorkCount >= 7)
+            if (_sectionIndex == 1 && _projectWorkCount >= 7)
               Positioned(
                 right: 16,
                 bottom: 16 + MediaQuery.paddingOf(context).bottom,
