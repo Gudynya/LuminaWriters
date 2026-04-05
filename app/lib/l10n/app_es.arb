@@ -57,7 +57,7 @@
   "projectsWorkLanguageLabel": "Idioma de la obra",
   "projectsTagsLabel": "Etiquetas",
   "projectsTagsHint": "Escribe y pulsa Enter, o separa con comas",
-  "projectsDescriptionMarkdownLabel": "Descripción (Markdown)",
+  "projectsDescriptionMarkdownLabel": "Descripción",
   "projectsMarkdownEditTab": "Escribir",
   "projectsMarkdownPreviewTab": "Vista previa",
   "projectsSaveButton": "Guardar",

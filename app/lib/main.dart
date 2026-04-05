@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 
 import 'l10n/app_localizations.dart';
 import 'screens/landing_page.dart';
@@ -66,7 +67,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       locale: _locale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: [
+        ...AppLocalizations.localizationsDelegates,
+        FlutterQuillLocalizations.delegate,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
       localeResolutionCallback: (deviceLocale, supported) {
         if (deviceLocale == null) return const Locale('es');

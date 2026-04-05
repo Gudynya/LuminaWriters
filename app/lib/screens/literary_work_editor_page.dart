@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
+import 'package:markdown/markdown.dart' as md;
+import 'package:markdown_quill/markdown_quill.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/literary_work.dart';
@@ -35,10 +39,20 @@ class _LiteraryWorkEditorPageState extends State<LiteraryWorkEditorPage>
     with SingleTickerProviderStateMixin {
   late final TextEditingController _projectNameController;
   late final TextEditingController _publicNameController;
-  late final TextEditingController _markdownController;
   late final TextEditingController _tagInputController;
+  late final QuillController _descriptionController;
+  late final FocusNode _descriptionFocusNode;
+  late final ScrollController _descriptionScrollController;
   late final TabController _tabController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final md.Document _markdownDocument = md.Document(
+    extensionSet: md.ExtensionSet.gitHubFlavored,
+    encodeHtml: false,
+  );
+  late final MarkdownToDelta _markdownToDelta =
+      MarkdownToDelta(markdownDocument: _markdownDocument);
+  final DeltaToMarkdown _deltaToMarkdown = DeltaToMarkdown();
 
   late String _languageCode;
   final List<String> _tags = [];
@@ -49,21 +63,54 @@ class _LiteraryWorkEditorPageState extends State<LiteraryWorkEditorPage>
     final w = widget.existing;
     _projectNameController = TextEditingController(text: w?.projectName ?? '');
     _publicNameController = TextEditingController(text: w?.publicName ?? '');
-    _markdownController = TextEditingController(text: w?.descriptionMarkdown ?? '');
     _tagInputController = TextEditingController();
     _languageCode = w?.languageCode ?? 'es';
     if (w != null) {
       _tags.addAll(w.tags);
     }
+
+    final initialMd = w?.descriptionMarkdown ?? '';
+    final delta = _deltaFromMarkdown(initialMd);
+    _descriptionController = QuillController(
+      document: Document.fromDelta(delta),
+      selection: const TextSelection.collapsed(offset: 0),
+    );
+    _descriptionFocusNode = FocusNode();
+    _descriptionScrollController = ScrollController();
     _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        setState(() {});
+      }
+    });
+  }
+
+  /// [Document.fromDelta] exige un delta no vacío (p. ej. al menos un `\n`).
+  Delta _deltaFromMarkdown(String text) {
+    try {
+      final input = text.isEmpty ? '\n' : text;
+      var delta = _markdownToDelta.convert(input);
+      if (delta.isEmpty) {
+        delta = Delta()..insert('\n');
+      }
+      return delta;
+    } catch (_) {
+      return Delta()..insert(text.isEmpty ? '\n' : '$text\n');
+    }
+  }
+
+  String _descriptionAsMarkdown() {
+    return _deltaToMarkdown.convert(_descriptionController.document.toDelta());
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _descriptionScrollController.dispose();
+    _descriptionFocusNode.dispose();
+    _descriptionController.dispose();
     _projectNameController.dispose();
     _publicNameController.dispose();
-    _markdownController.dispose();
     _tagInputController.dispose();
     super.dispose();
   }
@@ -95,7 +142,7 @@ class _LiteraryWorkEditorPageState extends State<LiteraryWorkEditorPage>
         projectName: _projectNameController.text.trim(),
         publicName: _publicNameController.text.trim(),
         languageCode: _languageCode,
-        descriptionMarkdown: _markdownController.text,
+        descriptionMarkdown: _descriptionAsMarkdown(),
         tags: List<String>.from(_tags),
       ),
     );
@@ -106,6 +153,7 @@ class _LiteraryWorkEditorPageState extends State<LiteraryWorkEditorPage>
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final isNew = widget.existing == null;
+    final outline = theme.colorScheme.outline.withValues(alpha: 0.5);
 
     return Scaffold(
       appBar: AppBar(
@@ -250,37 +298,51 @@ class _LiteraryWorkEditorPageState extends State<LiteraryWorkEditorPage>
                       ],
                     ),
                     SizedBox(
-                      height: 260,
+                      height: 340,
                       child: TabBarView(
                         controller: _tabController,
                         children: [
-                          TextField(
-                            controller: _markdownController,
-                            maxLines: null,
-                            expands: true,
-                            textAlignVertical: TextAlignVertical.top,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              alignLabelWithHint: true,
-                            ),
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              fontFamily: 'monospace',
-                            ),
-                          ),
-                          AnimatedBuilder(
-                            animation: _markdownController,
-                            builder: (context, child) {
-                              return SingleChildScrollView(
-                                padding: const EdgeInsets.all(12),
-                                child: MarkdownBody(
-                                  data: _markdownController.text.isEmpty
-                                      ? ' '
-                                      : _markdownController.text,
-                                  selectable: true,
-                                  shrinkWrap: true,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              QuillSimpleToolbar(
+                                controller: _descriptionController,
+                                config: const QuillSimpleToolbarConfig(
+                                  showFontFamily: false,
+                                  showFontSize: false,
+                                  showColorButton: false,
+                                  showBackgroundColorButton: false,
+                                  showSearchButton: false,
+                                  showSubscript: false,
+                                  showSuperscript: false,
+                                  showListCheck: false,
                                 ),
-                              );
-                            },
+                              ),
+                              const SizedBox(height: 8),
+                              Expanded(
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: outline),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: QuillEditor.basic(
+                                      controller: _descriptionController,
+                                      focusNode: _descriptionFocusNode,
+                                      scrollController: _descriptionScrollController,
+                                      config: const QuillEditorConfig(
+                                        expands: true,
+                                        padding: EdgeInsets.all(12),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          _MarkdownPreviewPane(
+                            markdown: _descriptionAsMarkdown(),
                           ),
                         ],
                       ),
@@ -290,6 +352,29 @@ class _LiteraryWorkEditorPageState extends State<LiteraryWorkEditorPage>
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MarkdownPreviewPane extends StatelessWidget {
+  const _MarkdownPreviewPane({required this.markdown});
+
+  final String markdown;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final data = markdown.trim().isEmpty ? ' ' : markdown;
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(12),
+      child: MarkdownBody(
+        data: data,
+        selectable: true,
+        shrinkWrap: true,
+        styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
+          p: theme.textTheme.bodyMedium,
         ),
       ),
     );

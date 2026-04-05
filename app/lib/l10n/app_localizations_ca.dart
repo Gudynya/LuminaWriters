@@ -165,7 +165,7 @@ class AppLocalizationsCa extends AppLocalizations {
   String get projectsTagsHint => 'Escriu i prem Enter, o separa amb comes';
 
   @override
-  String get projectsDescriptionMarkdownLabel => 'Descripció (Markdown)';
+  String get projectsDescriptionMarkdownLabel => 'Descripció';
 
   @override
   String get projectsMarkdownEditTab => 'Escriure';

@@ -57,7 +57,7 @@
   "projectsWorkLanguageLabel": "Language of the work",
   "projectsTagsLabel": "Tags",
   "projectsTagsHint": "Type and press Enter, or separate with commas",
-  "projectsDescriptionMarkdownLabel": "Description (Markdown)",
+  "projectsDescriptionMarkdownLabel": "Description",
   "projectsMarkdownEditTab": "Write",
   "projectsMarkdownPreviewTab": "Preview",
   "projectsSaveButton": "Save",

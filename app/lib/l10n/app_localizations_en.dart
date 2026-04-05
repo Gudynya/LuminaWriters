@@ -165,7 +165,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Type and press Enter, or separate with commas';
 
   @override
-  String get projectsDescriptionMarkdownLabel => 'Description (Markdown)';
+  String get projectsDescriptionMarkdownLabel => 'Description';
 
   @override
   String get projectsMarkdownEditTab => 'Write';
