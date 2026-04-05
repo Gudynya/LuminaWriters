@@ -57,7 +57,7 @@
   "projectsWorkLanguageLabel": "Idioma de l'obra",
   "projectsTagsLabel": "Etiquetes",
   "projectsTagsHint": "Escriu i prem Enter, o separa amb comes",
-  "projectsDescriptionMarkdownLabel": "Descripció (Markdown)",
+  "projectsDescriptionMarkdownLabel": "Descripció",
   "projectsMarkdownEditTab": "Escriure",
   "projectsMarkdownPreviewTab": "Vista prèvia",
   "projectsSaveButton": "Desa",

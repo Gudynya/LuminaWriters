@@ -25,7 +25,7 @@ app/
 - **Locales soportados:** `ca` (catalán), `en`, `es` (definidos en ARB y `AppLocalizations.supportedLocales`).
 - **Plantilla:** `lib/l10n/app_en.arb`; traducciones: `app_ca.arb`, `app_es.arb` (y futuros `app_<lang>.arb`).
 - **Configuración:** `l10n.yaml` en `app/`; `flutter: generate: true` en `pubspec.yaml`.
-- **Dependencias:** `flutter_localizations` (SDK), `intl`; landing: `font_awesome_flutter`, `url_launcher`; **Proyectos / descripción:** `flutter_markdown` para vista previa Markdown.
+- **Dependencias:** `flutter_localizations` (SDK), `intl`; landing: `font_awesome_flutter`, `url_launcher`; **Proyectos / descripción:** `flutter_quill` + `markdown_quill` (edición enriquecida, export/import Markdown) y `flutter_markdown` para la pestaña de vista previa; paquete `markdown` explícito para el documento de parseo; **`FlutterQuillLocalizations.delegate`** añadido junto a los delegados de `AppLocalizations` en `MaterialApp`.
 - **Uso en código:** `AppLocalizations.of(context)`; **no** duplicar cadenas visibles fuera de ARB salvo nombres de marca fijos.
 - **Convención de claves:** `lowerCamelCase` descriptivo (`shellHomeTab`, `shellProjectsTab`, `shellLibraryTab` para la pestaña cuyo **texto** es «Comunidad» en español, `projectsEmptyTitle`, `languageSelectorLabel`, …).
 - **`MyApp` (`lib/main.dart`):** widget **con estado** que mantiene el `locale` activo y lo pasa a **`MainShellPage`** como `onLocaleChanged` para que el selector del drawer actualice el idioma de la app.
@@ -58,8 +58,8 @@ Definidas en `lib/main.dart`:
 
 ## Modelo y formulario de obra (`LiteraryWork`, `LiteraryWorkEditorPage`)
 
-- Campos: identificador interno, **nombre de proyecto**, **nombre público**, **idioma de la obra** (`es`/`en`/`ca`), **descripción** (texto Markdown), **tags** (chips).
-- Editor: pestañas **Escribir** (campo de texto) y **Vista previa** (`MarkdownBody`).
+- Campos: identificador interno, **nombre de proyecto**, **nombre público**, **idioma de la obra** (`es`/`en`/`ca`), **descripción** almacenada como **string Markdown** (export desde Quill), **tags** (chips).
+- Editor: pestaña **Escribir** con **`QuillEditor`** + **`QuillSimpleToolbar`** (negrita, cursiva, subrayado, listas, enlaces, etc.); pestaña **Vista previa** con **`MarkdownBody`** sobre el Markdown generado. El `Document` de Quill **no** admite delta vacío: la inicialización garantiza un delta mínimo (p. ej. salto de línea) si la conversión Markdown→Delta devuelve vacío.
 
 ## Convenciones
 

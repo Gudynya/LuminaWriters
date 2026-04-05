@@ -10,13 +10,16 @@ El cliente Flutter ya tenía **MaterialApp** con i18n, landing y flujo auth que 
 
 - Un solo **layout** (drawer + `IndexedStack`) para las secciones principales.
 - **CRUD** de obras con modelo claro y formulario en **pantalla completa** (`Navigator.push`).
-- **Markdown** para descripción: edición + vista previa con `flutter_markdown`.
+- **Markdown** como formato de almacenamiento de la descripción; vista previa con `flutter_markdown`.
 - **Selector de idioma** en el drawer para usuarios autenticados (sin duplicar el widget flotante de landing/login).
 
 **Non-Goals:**
 
 - Persistencia de obras en disco o nube.
-- Editor WYSIWYG avanzado (p. ej. Quill) en esta entrega de la rama `feature/project-management` (puede explorarse en otra rama/PR).
+
+**Rama `feature/markdownexperimentaleditor` (y posteriores):**
+
+- **Editor WYSIWYG** con **`flutter_quill`**: barra de herramientas compacta (sin familia/tamaño de fuente ni colores por defecto en toolbar), conversión **Delta ↔ Markdown** vía **`markdown_quill`**, y delegados **`FlutterQuillLocalizations`** en `MaterialApp`.
 
 ## Decisions
 
@@ -24,7 +27,8 @@ El cliente Flutter ya tenía **MaterialApp** con i18n, landing y flujo auth que 
 |----------|----------------|--------|
 | Estado de obras en **lista en memoria** en el widget de sección | Provider/Repository global | Menor complejidad para MVP; fácil de sustituir después. |
 | **Drawer** con secciones 0–2 arriba y **Ajustes + cierre + idiomas** abajo | Bottom bar | Más espacio para lista; patrón Material familiar en tablet/web. |
-| Descripción como **Markdown** almacenado en string | HTML o Delta | Compatible con vista previa y futura exportación; dependencia ya ligera. |
+| Descripción como **Markdown** en string | HTML o solo Delta | **Export** desde Quill con `DeltaToMarkdown`; import con `MarkdownToDelta` y `markdown` Document (GFM, `encodeHtml: false`). |
+| **Quill** para edición | Solo `TextField` + Markdown crudo | Mejor UX para usuarios no técnicos; coste: más dependencias y cuidado con delta vacío. |
 | **LanguageFlagSelector** con `expandWidth` / `removeBackground` solo en drawer | Mismo widget que landing | Legibilidad sobre fondo claro del drawer. |
 | Pestaña **Comunidad** (antes Biblioteca) | Mantener "Biblioteca" | Copy alineado con visión de comunidad (solo texto i18n). |
 

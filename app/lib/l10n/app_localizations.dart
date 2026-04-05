@@ -403,7 +403,7 @@ abstract class AppLocalizations {
   /// No description provided for @projectsDescriptionMarkdownLabel.
   ///
   /// In en, this message translates to:
-  /// **'Description (Markdown)'**
+  /// **'Description'**
   String get projectsDescriptionMarkdownLabel;
 
   /// No description provided for @projectsMarkdownEditTab.
