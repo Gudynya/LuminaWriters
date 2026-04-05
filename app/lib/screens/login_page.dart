@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../data/repositories/session_repository.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/language_flag_selector.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, this.onLocaleChanged});
+  const LoginPage({
+    super.key,
+    this.onLocaleChanged,
+    required this.sessionRepository,
+  });
 
   final ValueChanged<Locale>? onLocaleChanged;
+  final SessionRepository sessionRepository;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -121,7 +127,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 FilledButton(
-                                  onPressed: () {
+                                  onPressed: () async {
+                                    await widget.sessionRepository.signIn();
+                                    if (!context.mounted) return;
                                     Navigator.of(context)
                                         .pushReplacementNamed('/home');
                                   },

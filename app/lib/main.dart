@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'data/repositories/app_repositories.dart';
 import 'l10n/app_localizations.dart';
 import 'screens/landing_page.dart';
 import 'screens/login_page.dart';
@@ -8,15 +9,22 @@ import 'screens/password_recovery_page.dart';
 import 'screens/sign_up_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp(repositories: AppRepositories.memory()));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key, this.locale});
+  const MyApp({
+    super.key,
+    this.locale,
+    required this.repositories,
+  });
 
   /// For tests: force a [Locale] (e.g. `Locale('es')`). In production use `null`
   /// to follow the device / browser locale on first frame.
   final Locale? locale;
+
+  /// Repositorios de la aplicación (composición en [main]).
+  final AppRepositories repositories;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -44,7 +52,21 @@ class _MyAppState extends State<MyApp> {
       _locale = _resolveToSupported(
         WidgetsBinding.instance.platformDispatcher.locale,
       );
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _applyPreferredLocaleFromRepository();
+      });
     }
+  }
+
+  Future<void> _applyPreferredLocaleFromRepository() async {
+    final preferred =
+        await widget.repositories.localePreference.getPreferredLocale();
+    if (!mounted || preferred == null) return;
+    final resolved = _resolveToSupported(preferred);
+    if (resolved == _locale) return;
+    setState(() {
+      _locale = resolved;
+    });
   }
 
   @override
@@ -56,9 +78,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _setLocale(Locale locale) {
+    final resolved = _resolveToSupported(locale);
     setState(() {
-      _locale = _resolveToSupported(locale);
+      _locale = resolved;
     });
+    widget.repositories.localePreference.setPreferredLocale(resolved);
   }
 
   @override
@@ -84,10 +108,16 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => LandingPage(onLocaleChanged: _setLocale),
-        '/login': (context) => LoginPage(onLocaleChanged: _setLocale),
+        '/login': (context) => LoginPage(
+              onLocaleChanged: _setLocale,
+              sessionRepository: widget.repositories.session,
+            ),
         '/signup': (context) => SignUpPage(onLocaleChanged: _setLocale),
         '/recover-password': (context) => const PasswordRecoveryPage(),
-        '/home': (context) => MainShellPage(onLocaleChanged: _setLocale),
+        '/home': (context) => MainShellPage(
+              onLocaleChanged: _setLocale,
+              repositories: widget.repositories,
+            ),
       },
     );
   }

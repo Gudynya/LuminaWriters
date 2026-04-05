@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:lumina_writers/data/repositories/app_repositories.dart';
 import 'package:lumina_writers/l10n/app_localizations.dart';
 import 'package:lumina_writers/main.dart';
 import 'package:lumina_writers/screens/landing_page.dart';
@@ -11,7 +12,10 @@ void main() {
     'Landing muestra el título y navega a login y recuperación',
     (tester) async {
       await tester.pumpWidget(
-        const MyApp(locale: Locale('es')),
+        MyApp(
+          locale: const Locale('es'),
+          repositories: AppRepositories.memory(),
+        ),
       );
       await tester.pumpAndSettle();
 
