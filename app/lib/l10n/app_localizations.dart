@@ -333,6 +333,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Content for {sectionName} is coming soon.'**
   String shellSectionPlaceholder(String sectionName);
+
+  /// No description provided for @projectsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No literary works yet'**
+  String get projectsEmptyTitle;
+
+  /// No description provided for @projectsAddNewWorkButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add new'**
+  String get projectsAddNewWorkButton;
+
+  /// No description provided for @projectsAddFabTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Add literary work'**
+  String get projectsAddFabTooltip;
+
+  /// No description provided for @projectsNewWorkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New literary work'**
+  String get projectsNewWorkTitle;
+
+  /// No description provided for @projectsEditWorkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit literary work'**
+  String get projectsEditWorkTitle;
+
+  /// No description provided for @projectsEditTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get projectsEditTooltip;
+
+  /// No description provided for @projectsProjectNameField.
+  ///
+  /// In en, this message translates to:
+  /// **'Project name'**
+  String get projectsProjectNameField;
+
+  /// No description provided for @projectsPublicNameField.
+  ///
+  /// In en, this message translates to:
+  /// **'Public name'**
+  String get projectsPublicNameField;
+
+  /// No description provided for @projectsWorkLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Language of the work'**
+  String get projectsWorkLanguageLabel;
+
+  /// No description provided for @projectsTagsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get projectsTagsLabel;
+
+  /// No description provided for @projectsTagsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type and press Enter, or separate with commas'**
+  String get projectsTagsHint;
+
+  /// No description provided for @projectsDescriptionMarkdownLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (Markdown)'**
+  String get projectsDescriptionMarkdownLabel;
+
+  /// No description provided for @projectsMarkdownEditTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Write'**
+  String get projectsMarkdownEditTab;
+
+  /// No description provided for @projectsMarkdownPreviewTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get projectsMarkdownPreviewTab;
+
+  /// No description provided for @projectsSaveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get projectsSaveButton;
+
+  /// No description provided for @projectsCancelButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get projectsCancelButton;
+
+  /// No description provided for @projectsDeleteButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get projectsDeleteButton;
+
+  /// No description provided for @projectsDeleteConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete literary work?'**
+  String get projectsDeleteConfirmTitle;
+
+  /// No description provided for @projectsDeleteConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'“{title}” will be removed. This cannot be undone.'**
+  String projectsDeleteConfirmBody(String title);
+
+  /// No description provided for @projectsProjectNameRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a project name'**
+  String get projectsProjectNameRequiredError;
+
+  /// No description provided for @projectsPublicNameRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a public name'**
+  String get projectsPublicNameRequiredError;
 }
 
 class _AppLocalizationsDelegate

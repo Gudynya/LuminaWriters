@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../widgets/language_flag_selector.dart';
+import 'literary_works_section.dart';
 
 /// Pantalla principal tras el login: [Scaffold] con menú lateral y contenido por sección.
 class MainShellPage extends StatefulWidget {
-  const MainShellPage({super.key});
+  const MainShellPage({super.key, this.onLocaleChanged});
+
+  /// Igual que en landing/login: cambia el idioma de la app (MaterialApp).
+  final ValueChanged<Locale>? onLocaleChanged;
 
   @override
   State<MainShellPage> createState() => _MainShellPageState();
@@ -12,6 +17,10 @@ class MainShellPage extends StatefulWidget {
 
 class _MainShellPageState extends State<MainShellPage> {
   int _sectionIndex = 0;
+
+  final GlobalKey<LiteraryWorksSectionState> _projectsSectionKey =
+      GlobalKey<LiteraryWorksSectionState>();
+  int _projectWorkCount = 0;
 
   static const List<_MainSectionIcons> _sectionIcons = [
     _MainSectionIcons(
@@ -55,7 +64,6 @@ class _MainShellPageState extends State<MainShellPage> {
     final l10n = AppLocalizations.of(context);
     final titles = _sectionTitles(l10n);
     final currentTitle = titles[_sectionIndex];
-    final icons = _sectionIcons[_sectionIndex];
 
     return Scaffold(
       appBar: AppBar(
@@ -124,10 +132,91 @@ class _MainShellPageState extends State<MainShellPage> {
         ),
       ),
       body: SafeArea(
-        child: _MainSectionBody(
-          sectionTitle: currentTitle,
-          selectedIcon: icons.selectedIcon,
-          l10n: l10n,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            IndexedStack(
+              index: _sectionIndex,
+              children: [
+                _MainSectionBody(
+                  sectionTitle: titles[0],
+                  selectedIcon: _sectionIcons[0].selectedIcon,
+                  l10n: l10n,
+                ),
+                LiteraryWorksSection(
+                  key: _projectsSectionKey,
+                  onWorkCountChanged: (n) =>
+                      setState(() => _projectWorkCount = n),
+                ),
+                _MainSectionBody(
+                  sectionTitle: titles[2],
+                  selectedIcon: _sectionIcons[2].selectedIcon,
+                  l10n: l10n,
+                ),
+                _MainSectionBody(
+                  sectionTitle: titles[3],
+                  selectedIcon: _sectionIcons[3].selectedIcon,
+                  l10n: l10n,
+                ),
+              ],
+            ),
+            if (widget.onLocaleChanged != null)
+              Positioned(
+                right: 16,
+                bottom: 16 + MediaQuery.paddingOf(context).bottom,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    if (_sectionIndex == 1 && _projectWorkCount >= 7) ...[
+                      Material(
+                        elevation: 2,
+                        shadowColor: Colors.black26,
+                        borderRadius: BorderRadius.circular(16),
+                        clipBehavior: Clip.antiAlias,
+                        child: IconButton.filled(
+                          onPressed: () =>
+                              _projectsSectionKey.currentState?.openEditor(),
+                          tooltip: l10n.projectsAddFabTooltip,
+                          icon: const Icon(Icons.add_rounded),
+                          style: IconButton.styleFrom(
+                            minimumSize: const Size(44, 44),
+                            padding: EdgeInsets.zero,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                    LanguageFlagSelector(
+                      l10n: l10n,
+                      onLocaleChanged: widget.onLocaleChanged,
+                    ),
+                  ],
+                ),
+              )
+            else if (_sectionIndex == 1 && _projectWorkCount >= 7)
+              Positioned(
+                right: 16,
+                bottom: 16 + MediaQuery.paddingOf(context).bottom,
+                child: Material(
+                  elevation: 2,
+                  shadowColor: Colors.black26,
+                  borderRadius: BorderRadius.circular(16),
+                  clipBehavior: Clip.antiAlias,
+                  child: IconButton.filled(
+                    onPressed: () =>
+                        _projectsSectionKey.currentState?.openEditor(),
+                    tooltip: l10n.projectsAddFabTooltip,
+                    icon: const Icon(Icons.add_rounded),
+                    style: IconButton.styleFrom(
+                      minimumSize: const Size(44, 44),
+                      padding: EdgeInsets.zero,
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

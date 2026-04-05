@@ -45,5 +45,33 @@
         "type": "String"
       }
     }
-  }
+  },
+  "projectsEmptyTitle": "Encara no hi ha obres",
+  "projectsAddNewWorkButton": "Afegir nova",
+  "projectsAddFabTooltip": "Afegir obra",
+  "projectsNewWorkTitle": "Obra literària nova",
+  "projectsEditWorkTitle": "Edita l'obra literària",
+  "projectsEditTooltip": "Edita",
+  "projectsProjectNameField": "Nom del projecte",
+  "projectsPublicNameField": "Nom públic",
+  "projectsWorkLanguageLabel": "Idioma de l'obra",
+  "projectsTagsLabel": "Etiquetes",
+  "projectsTagsHint": "Escriu i prem Enter, o separa amb comes",
+  "projectsDescriptionMarkdownLabel": "Descripció (Markdown)",
+  "projectsMarkdownEditTab": "Escriure",
+  "projectsMarkdownPreviewTab": "Vista prèvia",
+  "projectsSaveButton": "Desa",
+  "projectsCancelButton": "Cancel·la",
+  "projectsDeleteButton": "Elimina",
+  "projectsDeleteConfirmTitle": "Vols eliminar l'obra?",
+  "projectsDeleteConfirmBody": "S'eliminarà «{title}». Aquesta acció no es pot desfer.",
+  "@projectsDeleteConfirmBody": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "projectsProjectNameRequiredError": "Introdueix un nom de projecte",
+  "projectsPublicNameRequiredError": "Introdueix un nom públic"
 }
