@@ -21,7 +21,7 @@
 - Navegación por rutas con nombre (`MaterialApp` / `routes`).
 - Pantallas de landing, login, registro, recuperación de contraseña y **shell principal** (`/home`).
 - **Shell:** `IndexedStack` con secciones; **drawer** con navegación (tres entradas principales + **Ajustes** y **Cerrar sesión** en el pie); **selector de idioma** (banderas) en la parte inferior del drawer; pestaña de biblioteca pública renombrada a **Comunidad** en copy (i18n).
-- **Proyectos:** CRUD de obras literarias en RAM: nombre de proyecto, nombre público, idioma de la obra (`es` / `en` / `ca`), descripción Markdown (editor con vista previa), tags; formulario en **pantalla completa**; reglas de UX para añadir obra (botón de texto vs FAB según número de obras).
+- **Proyectos:** CRUD de obras literarias en RAM: nombre de proyecto, nombre público, idioma de la obra (`es` / `en` / `ca`), descripción almacenada como **Markdown** (edición puede ser enriquecida, p. ej. Quill, con vista previa renderizada), tags; formulario en **pantalla completa**; reglas de UX para añadir obra (botón de texto vs FAB según número de obras).
 - **Internacionalización** `ca` / `en` / `es` (ARB, `AppLocalizations`); idioma inicial según navegador o sistema; selector en **landing, login y registro** (esquina inferior derecha); usuario autenticado cambia idioma desde el **drawer** (sin persistencia obligatoria entre sesiones).
 - Pruebas de widget sobre flujos básicos de navegación donde existan.
 

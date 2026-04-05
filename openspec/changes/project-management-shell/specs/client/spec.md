@@ -18,7 +18,16 @@ El cliente SHALL listar obras desde estado en memoria, abrir `LiteraryWorkEditor
 #### Scenario: Vista previa de descripción
 
 - **WHEN** el usuario está en la pestaña de vista previa del editor
-- **THEN** el contenido se renderiza con `flutter_markdown` coherente con el texto del campo de edición
+- **THEN** el contenido se renderiza con `flutter_markdown` coherente con el Markdown exportado desde el documento Quill
+
+### Requirement: Editor de descripción tipo rich text (Quill)
+
+El cliente SHALL permitir editar la descripción con `QuillEditor` y barra `QuillSimpleToolbar`, SHALL serializar a Markdown para el modelo con `markdown_quill`, y SHALL registrar `FlutterQuillLocalizations.delegate` en `MaterialApp`.
+
+#### Scenario: Guardar descripción formateada
+
+- **WHEN** el usuario aplica negrita u otros estilos y guarda
+- **THEN** el campo `descriptionMarkdown` del resultado contiene la sintaxis Markdown equivalente generada por `DeltaToMarkdown`
 
 ## MODIFIED Requirements
 
