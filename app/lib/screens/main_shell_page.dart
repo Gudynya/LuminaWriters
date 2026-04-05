@@ -36,6 +36,10 @@ class _MainShellPageState extends State<MainShellPage> {
       selectedIcon: Icons.menu_book_rounded,
     ),
     _MainSectionIcons(
+      icon: Icons.card_giftcard_outlined,
+      selectedIcon: Icons.card_giftcard_rounded,
+    ),
+    _MainSectionIcons(
       icon: Icons.settings_outlined,
       selectedIcon: Icons.settings_rounded,
     ),
@@ -45,6 +49,7 @@ class _MainShellPageState extends State<MainShellPage> {
         l10n.shellHomeTab,
         l10n.shellProjectsTab,
         l10n.shellLibraryTab,
+        l10n.shellRewardsTab,
         l10n.shellSettingsTab,
       ];
 
@@ -107,7 +112,7 @@ class _MainShellPageState extends State<MainShellPage> {
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
-                    for (var i = 0; i < 3; i++)
+                    for (var i = 0; i < 4; i++)
                       ListTile(
                         leading: Icon(
                           _sectionIndex == i
@@ -124,13 +129,13 @@ class _MainShellPageState extends State<MainShellPage> {
               const Divider(height: 1),
               ListTile(
                 leading: Icon(
-                  _sectionIndex == 3
-                      ? _sectionIcons[3].selectedIcon
-                      : _sectionIcons[3].icon,
+                  _sectionIndex == 4
+                      ? _sectionIcons[4].selectedIcon
+                      : _sectionIcons[4].icon,
                 ),
-                title: Text(titles[3]),
-                selected: _sectionIndex == 3,
-                onTap: () => _goToSection(3),
+                title: Text(titles[4]),
+                selected: _sectionIndex == 4,
+                onTap: () => _goToSection(4),
               ),
               ListTile(
                 leading: const Icon(Icons.logout_rounded),
@@ -178,6 +183,11 @@ class _MainShellPageState extends State<MainShellPage> {
                 _MainSectionBody(
                   sectionTitle: titles[3],
                   selectedIcon: _sectionIcons[3].selectedIcon,
+                  l10n: l10n,
+                ),
+                _MainSectionBody(
+                  sectionTitle: titles[4],
+                  selectedIcon: _sectionIcons[4].selectedIcon,
                   l10n: l10n,
                 ),
               ],

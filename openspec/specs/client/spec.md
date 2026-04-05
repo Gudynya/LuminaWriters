@@ -27,11 +27,11 @@ app/
 - **Configuración:** `l10n.yaml` en `app/`; `flutter: generate: true` en `pubspec.yaml`.
 - **Dependencias:** `flutter_localizations` (SDK), `intl`; landing: `font_awesome_flutter`, `url_launcher`; **Proyectos / descripción:** `flutter_markdown` para vista previa Markdown.
 - **Uso en código:** `AppLocalizations.of(context)`; **no** duplicar cadenas visibles fuera de ARB salvo nombres de marca fijos.
-- **Convención de claves:** `lowerCamelCase` descriptivo (`shellHomeTab`, `shellProjectsTab`, `shellLibraryTab` para la pestaña cuyo **texto** es «Comunidad» en español, `projectsEmptyTitle`, `languageSelectorLabel`, …).
+- **Convención de claves:** `lowerCamelCase` descriptivo (`shellHomeTab`, `shellProjectsTab`, `shellLibraryTab` para la pestaña cuyo **texto** es «Comunidad» en español, `shellRewardsTab`, `projectsEmptyTitle`, `languageSelectorLabel`, …).
 - **`MyApp` (`lib/main.dart`):** widget **con estado** que mantiene el `locale` activo y lo pasa a **`MainShellPage`** como `onLocaleChanged` para que el selector del drawer actualice el idioma de la app.
 - **Selector de idioma**
   - **Landing, login, registro:** `LanguageFlagSelector` en esquina **inferior derecha** (estilo compacto con fondo oscuro).
-  - **Usuario autenticado (drawer):** mismo componente con **`expandWidth: true`** y **`removeBackground: true`** (fila a ancho útil, bordes según tema), en el **pie** del drawer, **debajo** de Cerrar sesión (orden: … → Ajustes → Cerrar sesión → [separador] → idiomas).
+  - **Usuario autenticado (drawer):** mismo componente con **`expandWidth: true`** y **`removeBackground: true`** (fila a ancho útil, bordes según tema), en el **pie** del drawer, **debajo** de Cerrar sesión (orden de la lista scrollable: Inicio → Proyectos → Comunidad → Recompensas; pie fijo: Ajustes → Cerrar sesión → [separador] → idiomas).
 - **Resolución de locale:** `localeResolutionCallback` con fallback a **español** si el idioma del sistema no está soportado.
 - **Tests:** fijar `MyApp(locale: Locale('es'))` cuando se aserten textos localizados; usar `AppLocalizations` para cadenas esperadas.
 
@@ -45,16 +45,16 @@ Definidas en `lib/main.dart`:
 | `/login` | `LoginPage` | Credenciales |
 | `/signup` | `SignUpPage` | Registro |
 | `/recover-password` | `PasswordRecoveryPage` | Recuperación |
-| `/home` | `MainShellPage` | Área autenticada: **drawer**, secciones (Inicio, Proyectos, Comunidad, placeholders + Ajustes en pie) |
+| `/home` | `MainShellPage` | Área autenticada: **drawer**, secciones (Inicio, Proyectos, Comunidad, Recompensas, placeholders + Ajustes en pie) |
 
 **Navegación interna (no ruta con nombre):** `LiteraryWorkEditorPage` se abre con **`Navigator.push`** desde la sección Proyectos (crear/editar obra).
 
 ## Shell principal (`MainShellPage`)
 
 - **`IndexedStack`** para el cuerpo según índice de sección.
-- **Drawer:** lista scrollable con **Inicio**, **Proyectos**, **Comunidad**; pie fijo con **Ajustes** (misma sección que el ítem «Ajustes» del stack), **Cerrar sesión** (vuelve a `/`), bloque de **idioma** al final.
+- **Drawer:** lista scrollable con **Inicio**, **Proyectos**, **Comunidad**, **Recompensas**; pie fijo con **Ajustes** (misma sección que el ítem «Ajustes» del stack), **Cerrar sesión** (vuelve a `/`), bloque de **idioma** al final.
 - **Proyectos:** widget de sección con lista de obras, acciones editar/borrar, alta según reglas de UX (FAB/`+` o botón «Añadir nueva»).
-- **Comunidad / Inicio / Ajustes (MVP):** placeholders localizados hasta que exista contenido.
+- **Comunidad / Recompensas / Inicio / Ajustes (MVP):** placeholders localizados hasta que exista contenido.
 
 ## Modelo y formulario de obra (`LiteraryWork`, `LiteraryWorkEditorPage`)
 

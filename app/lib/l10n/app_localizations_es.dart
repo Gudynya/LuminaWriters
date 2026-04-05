@@ -115,6 +115,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get shellLibraryTab => 'Comunidad';
 
   @override
+  String get shellRewardsTab => 'Recompensas';
+
+  @override
   String get shellSettingsTab => 'Ajustes';
 
   @override

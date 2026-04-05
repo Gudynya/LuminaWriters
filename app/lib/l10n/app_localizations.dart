@@ -304,6 +304,12 @@ abstract class AppLocalizations {
   /// **'Community'**
   String get shellLibraryTab;
 
+  /// No description provided for @shellRewardsTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewards'**
+  String get shellRewardsTab;
+
   /// No description provided for @shellSettingsTab.
   ///
   /// In en, this message translates to:
