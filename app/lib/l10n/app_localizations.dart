@@ -301,7 +301,7 @@ abstract class AppLocalizations {
   /// No description provided for @shellLibraryTab.
   ///
   /// In en, this message translates to:
-  /// **'Library'**
+  /// **'Community'**
   String get shellLibraryTab;
 
   /// No description provided for @shellSettingsTab.

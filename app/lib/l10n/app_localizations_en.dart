@@ -111,7 +111,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shellProjectsTab => 'Projects';
 
   @override
-  String get shellLibraryTab => 'Library';
+  String get shellLibraryTab => 'Community';
 
   @override
   String get shellSettingsTab => 'Settings';

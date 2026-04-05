@@ -112,7 +112,7 @@ class AppLocalizationsCa extends AppLocalizations {
   String get shellProjectsTab => 'Projectes';
 
   @override
-  String get shellLibraryTab => 'Biblioteca';
+  String get shellLibraryTab => 'Comunitat';
 
   @override
   String get shellSettingsTab => 'Configuració';
