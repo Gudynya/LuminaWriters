@@ -33,7 +33,7 @@
   "authSendLinkButton": "Send link",
   "shellHomeTab": "Home",
   "shellProjectsTab": "Projects",
-  "shellLibraryTab": "Library",
+  "shellLibraryTab": "Community",
   "shellSettingsTab": "Settings",
   "appBrandNameShort": "LuminaWriter",
   "shellDrawerSubtitle": "Your writing space",
@@ -45,5 +45,33 @@
         "type": "String"
       }
     }
-  }
+  },
+  "projectsEmptyTitle": "No literary works yet",
+  "projectsAddNewWorkButton": "Add new",
+  "projectsAddFabTooltip": "Add literary work",
+  "projectsNewWorkTitle": "New literary work",
+  "projectsEditWorkTitle": "Edit literary work",
+  "projectsEditTooltip": "Edit",
+  "projectsProjectNameField": "Project name",
+  "projectsPublicNameField": "Public name",
+  "projectsWorkLanguageLabel": "Language of the work",
+  "projectsTagsLabel": "Tags",
+  "projectsTagsHint": "Type and press Enter, or separate with commas",
+  "projectsDescriptionMarkdownLabel": "Description (Markdown)",
+  "projectsMarkdownEditTab": "Write",
+  "projectsMarkdownPreviewTab": "Preview",
+  "projectsSaveButton": "Save",
+  "projectsCancelButton": "Cancel",
+  "projectsDeleteButton": "Delete",
+  "projectsDeleteConfirmTitle": "Delete literary work?",
+  "projectsDeleteConfirmBody": "“{title}” will be removed. This cannot be undone.",
+  "@projectsDeleteConfirmBody": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "projectsProjectNameRequiredError": "Enter a project name",
+  "projectsPublicNameRequiredError": "Enter a public name"
 }

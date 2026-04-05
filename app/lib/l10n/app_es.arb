@@ -33,7 +33,7 @@
   "authSendLinkButton": "Enviar enlace",
   "shellHomeTab": "Inicio",
   "shellProjectsTab": "Proyectos",
-  "shellLibraryTab": "Biblioteca",
+  "shellLibraryTab": "Comunidad",
   "shellSettingsTab": "Ajustes",
   "appBrandNameShort": "LuminaWriter",
   "shellDrawerSubtitle": "Tu espacio de escritura",
@@ -45,5 +45,33 @@
         "type": "String"
       }
     }
-  }
+  },
+  "projectsEmptyTitle": "Aún no hay obras",
+  "projectsAddNewWorkButton": "Añadir nueva",
+  "projectsAddFabTooltip": "Añadir obra",
+  "projectsNewWorkTitle": "Nueva obra literaria",
+  "projectsEditWorkTitle": "Editar obra literaria",
+  "projectsEditTooltip": "Editar",
+  "projectsProjectNameField": "Nombre del proyecto",
+  "projectsPublicNameField": "Nombre público",
+  "projectsWorkLanguageLabel": "Idioma de la obra",
+  "projectsTagsLabel": "Etiquetas",
+  "projectsTagsHint": "Escribe y pulsa Enter, o separa con comas",
+  "projectsDescriptionMarkdownLabel": "Descripción (Markdown)",
+  "projectsMarkdownEditTab": "Escribir",
+  "projectsMarkdownPreviewTab": "Vista previa",
+  "projectsSaveButton": "Guardar",
+  "projectsCancelButton": "Cancelar",
+  "projectsDeleteButton": "Eliminar",
+  "projectsDeleteConfirmTitle": "¿Eliminar obra?",
+  "projectsDeleteConfirmBody": "Se eliminará «{title}». Esta acción no se puede deshacer.",
+  "@projectsDeleteConfirmBody": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "projectsProjectNameRequiredError": "Introduce un nombre de proyecto",
+  "projectsPublicNameRequiredError": "Introduce un nombre público"
 }

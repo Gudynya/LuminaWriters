@@ -111,7 +111,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shellProjectsTab => 'Projects';
 
   @override
-  String get shellLibraryTab => 'Library';
+  String get shellLibraryTab => 'Community';
 
   @override
   String get shellSettingsTab => 'Settings';
@@ -129,4 +129,70 @@ class AppLocalizationsEn extends AppLocalizations {
   String shellSectionPlaceholder(String sectionName) {
     return 'Content for $sectionName is coming soon.';
   }
+
+  @override
+  String get projectsEmptyTitle => 'No literary works yet';
+
+  @override
+  String get projectsAddNewWorkButton => 'Add new';
+
+  @override
+  String get projectsAddFabTooltip => 'Add literary work';
+
+  @override
+  String get projectsNewWorkTitle => 'New literary work';
+
+  @override
+  String get projectsEditWorkTitle => 'Edit literary work';
+
+  @override
+  String get projectsEditTooltip => 'Edit';
+
+  @override
+  String get projectsProjectNameField => 'Project name';
+
+  @override
+  String get projectsPublicNameField => 'Public name';
+
+  @override
+  String get projectsWorkLanguageLabel => 'Language of the work';
+
+  @override
+  String get projectsTagsLabel => 'Tags';
+
+  @override
+  String get projectsTagsHint =>
+      'Type and press Enter, or separate with commas';
+
+  @override
+  String get projectsDescriptionMarkdownLabel => 'Description (Markdown)';
+
+  @override
+  String get projectsMarkdownEditTab => 'Write';
+
+  @override
+  String get projectsMarkdownPreviewTab => 'Preview';
+
+  @override
+  String get projectsSaveButton => 'Save';
+
+  @override
+  String get projectsCancelButton => 'Cancel';
+
+  @override
+  String get projectsDeleteButton => 'Delete';
+
+  @override
+  String get projectsDeleteConfirmTitle => 'Delete literary work?';
+
+  @override
+  String projectsDeleteConfirmBody(String title) {
+    return '“$title” will be removed. This cannot be undone.';
+  }
+
+  @override
+  String get projectsProjectNameRequiredError => 'Enter a project name';
+
+  @override
+  String get projectsPublicNameRequiredError => 'Enter a public name';
 }

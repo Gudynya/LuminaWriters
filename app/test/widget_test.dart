@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:lumina_writers/l10n/app_localizations.dart';
 import 'package:lumina_writers/main.dart';
 import 'package:lumina_writers/screens/landing_page.dart';
+import 'package:lumina_writers/screens/main_shell_page.dart';
 
 void main() {
   testWidgets(
@@ -40,7 +41,17 @@ void main() {
       await tester.tap(find.text(l10n.authSignInButton));
       await tester.pumpAndSettle();
 
-      expect(find.text(l10n.shellHomeTab), findsOneWidget);
+      final l10nShell = AppLocalizations.of(
+        tester.element(find.byType(MainShellPage)),
+      );
+      expect(find.text(l10nShell.shellHomeTab), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.menu));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(l10nShell.shellProjectsTab));
+      await tester.pumpAndSettle();
+
+      expect(find.text(l10nShell.projectsEmptyTitle), findsOneWidget);
     },
   );
 }

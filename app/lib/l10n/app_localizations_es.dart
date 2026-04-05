@@ -112,7 +112,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get shellProjectsTab => 'Proyectos';
 
   @override
-  String get shellLibraryTab => 'Biblioteca';
+  String get shellLibraryTab => 'Comunidad';
 
   @override
   String get shellSettingsTab => 'Ajustes';
@@ -130,4 +130,70 @@ class AppLocalizationsEs extends AppLocalizations {
   String shellSectionPlaceholder(String sectionName) {
     return 'El contenido de «$sectionName» estará disponible pronto.';
   }
+
+  @override
+  String get projectsEmptyTitle => 'Aún no hay obras';
+
+  @override
+  String get projectsAddNewWorkButton => 'Añadir nueva';
+
+  @override
+  String get projectsAddFabTooltip => 'Añadir obra';
+
+  @override
+  String get projectsNewWorkTitle => 'Nueva obra literaria';
+
+  @override
+  String get projectsEditWorkTitle => 'Editar obra literaria';
+
+  @override
+  String get projectsEditTooltip => 'Editar';
+
+  @override
+  String get projectsProjectNameField => 'Nombre del proyecto';
+
+  @override
+  String get projectsPublicNameField => 'Nombre público';
+
+  @override
+  String get projectsWorkLanguageLabel => 'Idioma de la obra';
+
+  @override
+  String get projectsTagsLabel => 'Etiquetas';
+
+  @override
+  String get projectsTagsHint => 'Escribe y pulsa Enter, o separa con comas';
+
+  @override
+  String get projectsDescriptionMarkdownLabel => 'Descripción (Markdown)';
+
+  @override
+  String get projectsMarkdownEditTab => 'Escribir';
+
+  @override
+  String get projectsMarkdownPreviewTab => 'Vista previa';
+
+  @override
+  String get projectsSaveButton => 'Guardar';
+
+  @override
+  String get projectsCancelButton => 'Cancelar';
+
+  @override
+  String get projectsDeleteButton => 'Eliminar';
+
+  @override
+  String get projectsDeleteConfirmTitle => '¿Eliminar obra?';
+
+  @override
+  String projectsDeleteConfirmBody(String title) {
+    return 'Se eliminará «$title». Esta acción no se puede deshacer.';
+  }
+
+  @override
+  String get projectsProjectNameRequiredError =>
+      'Introduce un nombre de proyecto';
+
+  @override
+  String get projectsPublicNameRequiredError => 'Introduce un nombre público';
 }

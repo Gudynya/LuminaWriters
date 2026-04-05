@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => LoginPage(onLocaleChanged: _setLocale),
         '/signup': (context) => SignUpPage(onLocaleChanged: _setLocale),
         '/recover-password': (context) => const PasswordRecoveryPage(),
-        '/home': (context) => const MainShellPage(),
+        '/home': (context) => MainShellPage(onLocaleChanged: _setLocale),
       },
     );
   }
