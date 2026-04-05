@@ -2,6 +2,14 @@
 
 Aplicación **Flutter** para acompañar el proceso de escritura creativa: landing público, flujo de autenticación (inicio de sesión, registro, recuperación de contraseña) y un shell principal para el área autenticada.
 
+## Web (GitHub Pages)
+
+La app compilada para el navegador se publica en **GitHub Pages** (no confundir con la vista del repositorio en GitHub, donde siempre se muestra este `README` debajo de los archivos).
+
+- **URL de la app:** `https://Gudynya.github.io/LuminaWriters/` (ajusta mayúsculas si tu navegador o GitHub redirigen a otra variante).
+- **Si en esa URL ves el README en lugar de la interfaz Flutter:** en el repo ve a **Settings → Pages → Build and deployment**. El origen debe ser **Deploy from a branch**, rama **`gh-pages`**, carpeta **`/ (root)`**. Si eliges la rama **`main`** y la raíz del repo, Pages puede servir el `README.md` como página principal porque ahí no hay un `index.html` de la app.
+- El workflow **Deploy GitHub Pages** (`.github/workflows/deploy-pages.yml`) construye la web y actualiza la rama `gh-pages`.
+
 ## Requisitos
 
 - [Flutter](https://docs.flutter.dev/get-started/install) (canal stable recomendado)
