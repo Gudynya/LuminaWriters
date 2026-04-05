@@ -107,7 +107,7 @@ class _MainShellPageState extends State<MainShellPage> {
                 child: ListView(
                   padding: EdgeInsets.zero,
                   children: [
-                    for (var i = 0; i < _sectionIcons.length; i++)
+                    for (var i = 0; i < 3; i++)
                       ListTile(
                         leading: Icon(
                           _sectionIndex == i
@@ -118,28 +118,37 @@ class _MainShellPageState extends State<MainShellPage> {
                         selected: _sectionIndex == i,
                         onTap: () => _goToSection(i),
                       ),
-                    const Divider(),
-                    if (widget.onLocaleChanged != null)
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                        child: Align(
-                          alignment: AlignmentDirectional.centerStart,
-                          child: LanguageFlagSelector(
-                            l10n: l10n,
-                            onLocaleChanged: widget.onLocaleChanged,
-                            expandWidth: true,
-                            removeBackground: true,
-                          ),
-                        ),
-                      ),
-                    ListTile(
-                      leading: const Icon(Icons.logout_rounded),
-                      title: Text(l10n.shellSignOut),
-                      onTap: _logout,
-                    ),
                   ],
                 ),
               ),
+              const Divider(height: 1),
+              ListTile(
+                leading: Icon(
+                  _sectionIndex == 3
+                      ? _sectionIcons[3].selectedIcon
+                      : _sectionIcons[3].icon,
+                ),
+                title: Text(titles[3]),
+                selected: _sectionIndex == 3,
+                onTap: () => _goToSection(3),
+              ),
+              ListTile(
+                leading: const Icon(Icons.logout_rounded),
+                title: Text(l10n.shellSignOut),
+                onTap: _logout,
+              ),
+              if (widget.onLocaleChanged != null) ...[
+                const Divider(height: 1),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: LanguageFlagSelector(
+                    l10n: l10n,
+                    onLocaleChanged: widget.onLocaleChanged,
+                    expandWidth: true,
+                    removeBackground: true,
+                  ),
+                ),
+              ],
             ],
           ),
         ),
