@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../data/repositories/app_repositories.dart';
 import '../l10n/app_localizations.dart';
 import '../widgets/language_flag_selector.dart';
 import 'literary_works_section.dart';
 
 /// Pantalla principal tras el login: [Scaffold] con menú lateral y contenido por sección.
 class MainShellPage extends StatefulWidget {
-  const MainShellPage({super.key, this.onLocaleChanged});
+  const MainShellPage({
+    super.key,
+    required this.repositories,
+    this.onLocaleChanged,
+  });
+
+  final AppRepositories repositories;
 
   /// Igual que en landing/login: cambia el idioma de la app (MaterialApp).
   final ValueChanged<Locale>? onLocaleChanged;
@@ -53,7 +60,9 @@ class _MainShellPageState extends State<MainShellPage> {
     Navigator.of(context).pop();
   }
 
-  void _logout() {
+  Future<void> _logout() async {
+    await widget.repositories.session.signOut();
+    if (!mounted) return;
     Navigator.of(context).pop();
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
   }
@@ -167,6 +176,7 @@ class _MainShellPageState extends State<MainShellPage> {
                 ),
                 LiteraryWorksSection(
                   key: _projectsSectionKey,
+                  literaryWorkRepository: widget.repositories.literaryWorks,
                   onWorkCountChanged: (n) =>
                       setState(() => _projectWorkCount = n),
                 ),

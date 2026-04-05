@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../data/repositories/literary_work_repository.dart';
 import '../l10n/app_localizations.dart';
 import '../models/literary_work.dart';
 import 'literary_work_editor_page.dart';
 
-/// Lista y CRUD de obras literarias (estado en memoria; se conserva al cambiar de pestaña).
+/// Lista y CRUD de obras vía [literaryWorkRepository] (MVP: implementación en memoria).
 ///
 /// Con **7 o más** obras el **+** lo pinta [MainShellPage] en un Stack encima del contenido
 /// (sin encoger el ancho de la lista). Con **menos de 7** hay un botón «Añadir nueva» (sin +).
 class LiteraryWorksSection extends StatefulWidget {
   const LiteraryWorksSection({
     super.key,
+    required this.literaryWorkRepository,
     this.onWorkCountChanged,
   });
+
+  final LiteraryWorkRepository literaryWorkRepository;
 
   /// Notifica el número de obras (p. ej. para el FAB en el shell).
   final ValueChanged<int>? onWorkCountChanged;
@@ -22,7 +26,7 @@ class LiteraryWorksSection extends StatefulWidget {
 }
 
 class LiteraryWorksSectionState extends State<LiteraryWorksSection> {
-  final List<LiteraryWork> _works = [];
+  List<LiteraryWork> _works = [];
 
   /// Márgenes laterales mínimos (el [+] y los idiomas van en un Stack encima, sin reservar hueco).
   static double _contentHorizontalPadding(double maxWidth) {
@@ -38,16 +42,21 @@ class LiteraryWorksSectionState extends State<LiteraryWorksSection> {
     return 128 + safe;
   }
 
-  String _newId() => '${DateTime.now().microsecondsSinceEpoch}';
-
   void _notifyCount() {
     widget.onWorkCountChanged?.call(_works.length);
+  }
+
+  Future<void> _refreshFromRepository() async {
+    final list = await widget.literaryWorkRepository.listWorks();
+    if (!mounted) return;
+    setState(() => _works = list);
+    _notifyCount();
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _notifyCount());
+    _refreshFromRepository();
   }
 
   /// Abre el editor (usado desde el FAB del shell cuando hay ≥ 7 obras).
@@ -62,33 +71,27 @@ class LiteraryWorksSectionState extends State<LiteraryWorksSection> {
 
     if (result == null || !mounted) return;
 
-    setState(() {
-      if (existing == null) {
-        _works.add(
-          LiteraryWork(
-            id: _newId(),
-            projectName: result.projectName,
-            publicName: result.publicName,
-            descriptionMarkdown: result.descriptionMarkdown,
-            tags: result.tags,
-            languageCode: result.languageCode,
-          ),
-        );
-      } else {
-        final i = _works.indexWhere((w) => w.id == existing.id);
-        if (i >= 0) {
-          _works[i] = LiteraryWork(
-            id: existing.id,
-            projectName: result.projectName,
-            publicName: result.publicName,
-            descriptionMarkdown: result.descriptionMarkdown,
-            tags: result.tags,
-            languageCode: result.languageCode,
-          );
-        }
-      }
-    });
-    _notifyCount();
+    if (existing == null) {
+      await widget.literaryWorkRepository.create(
+        projectName: result.projectName,
+        publicName: result.publicName,
+        descriptionMarkdown: result.descriptionMarkdown,
+        tags: result.tags,
+        languageCode: result.languageCode,
+      );
+    } else {
+      await widget.literaryWorkRepository.update(
+        LiteraryWork(
+          id: existing.id,
+          projectName: result.projectName,
+          publicName: result.publicName,
+          descriptionMarkdown: result.descriptionMarkdown,
+          tags: result.tags,
+          languageCode: result.languageCode,
+        ),
+      );
+    }
+    await _refreshFromRepository();
   }
 
   Future<void> _confirmDelete(LiteraryWork work) async {
@@ -115,8 +118,8 @@ class LiteraryWorksSectionState extends State<LiteraryWorksSection> {
       ),
     );
     if (ok == true && mounted) {
-      setState(() => _works.removeWhere((w) => w.id == work.id));
-      _notifyCount();
+      await widget.literaryWorkRepository.deleteWork(work.id);
+      await _refreshFromRepository();
     }
   }
 
